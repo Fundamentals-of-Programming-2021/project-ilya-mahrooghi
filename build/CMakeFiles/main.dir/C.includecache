@@ -21,6 +21,12 @@ stdio.h
 -
 stdbool.h
 -
+stdlib.h
+-
+time.h
+-
+math.h
+-
 myheader.h
 /home/ilya/Desktop/codes/state.io/src/myheader.h
 
