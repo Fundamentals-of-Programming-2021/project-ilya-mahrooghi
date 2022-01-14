@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/myheader.h
+SDL2/SDL.h
+-
+SDL2/SDL2_gfxPrimitives.h
+-
+
+/home/ilya/Desktop/codes/state.io/src/main.c
+SDL2/SDL.h
+-
+SDL2/SDL2_gfxPrimitives.h
+-
+stdio.h
+-
+stdbool.h
+-
+myheader.h
+/home/ilya/Desktop/codes/state.io/src/myheader.h
+

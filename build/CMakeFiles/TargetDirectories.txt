@@ -1,0 +1,3 @@
+/home/ilya/Desktop/codes/state.io/build/CMakeFiles/rebuild_cache.dir
+/home/ilya/Desktop/codes/state.io/build/CMakeFiles/edit_cache.dir
+/home/ilya/Desktop/codes/state.io/build/CMakeFiles/main.dir
