@@ -93,6 +93,10 @@
 			{
 				"fragment" : "-lSDL2_gfx",
 				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lSDL2_ttf",
+				"role" : "libraries"
 			}
 		],
 		"language" : "C"
