@@ -10,7 +10,8 @@
 #include <time.h>
 #include <math.h>
 
-#include "myheader.h"
+#include "map.h"
+#include "soldiers.h"
 
 int main()
 {
@@ -43,18 +44,21 @@ int main()
   int numofregions;
   headregion = polygonwindow(sdlRenderer, center, color, &numofregions);
   ////////////////////////////////////////////////////////////////////////
+  struct soldier *soldier = (struct soldier *)malloc(sizeof(struct soldier));
+  soldier->x_center = 500;
+  soldier->y_center = 500;
   while (1)
   {
     // reset the color
-    
-    SDL_SetRenderDrawColor(sdlRenderer, 0xE0, 0xE0, 0xE0, 0xff);
+    SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
     SDL_RenderClear(sdlRenderer);
     // intialize the screen
     changecolorofregion(headregion, numofregions);
-    printregions(sdlRenderer, numofregions, headregion);
-    //shownumofsoldiers(sdlRenderer, headregion, numofregions);
     addsoldier(sdlRenderer, headregion, numofregions);
-
+    printregions(sdlRenderer, numofregions, headregion);
+    printsoldier(sdlRenderer, soldier);
+    soldier->x_center += 7;
+    soldier->y_center += 7;
     // render presentation and SDL_Quit=
     SDL_Delay(400);
     SDL_RenderPresent(sdlRenderer);

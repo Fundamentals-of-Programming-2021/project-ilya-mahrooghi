@@ -10,18 +10,25 @@ Uint32 neutralColor = 0x10000000;
 const double SCREEN_WIDTH = 1000;
 const double SCREEN_HEIGHT = 1000;
 
-int numofpoly = 17; // this is num of poly in a height of map
+int numofpoly = 11; // this is num of poly in a height of map
 
 struct point
 {
-    int x, y;
+    double x, y;
 };
 
 struct region
 {
-    int x_center, y_center;
+    double x_center, y_center;
     int numofsoldiers;
     Uint32 maincolor, nowcolor;
+};
+
+struct soldier
+{
+    struct region *from;
+    struct region *to;
+    double x_center, y_center;
 };
 
 void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0, int h0)
@@ -36,7 +43,7 @@ void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0,
     SDL_RenderCopy(renderer, texture, NULL, &texture_rect);
 }
 
-void text(SDL_Renderer *m_renderer, int xp, int yp, int w, int h, int fontsize, int R, int G, int B, int A, const char *S)
+void text(SDL_Renderer *m_renderer, double xp, double yp, double w, double h, int fontsize, int R, int G, int B, int A, const char *S)
 {
     TTF_Font *Sans = TTF_OpenFont("//home//ilya//Desktop//codes//state.io//fonts//GothicA1-Regular.ttf", fontsize);
     SDL_Color textcolor = {R, G, B, A};
@@ -63,7 +70,7 @@ void random_color_array(int num, Uint32 colorarray[num][num])
         {
             int tmp;
             tmp = rand();
-            tmp %= 7;
+            tmp %= 6;
 
             switch (tmp)
             {
@@ -75,6 +82,7 @@ void random_color_array(int num, Uint32 colorarray[num][num])
                 ;
                 break;
             case 2:
+
                 colorarray[i][j] = color3;
                 break;
             case 3:
@@ -105,8 +113,8 @@ struct point rotate(struct point center, struct point torotate, double angle)
 
 void drawtriangle(SDL_Renderer *renderer, struct point center, double radius, Uint32 color)
 {
-    int x = center.x;
-    int y = center.y;
+    double x = center.x;
+    double y = center.y;
     Sint16 *xarray = (Sint16 *)malloc(sizeof(Sint16) * 3);
     Sint16 *yarray = (Sint16 *)malloc(sizeof(Sint16) * 3);
     struct point firstpoint;
@@ -122,10 +130,18 @@ void drawtriangle(SDL_Renderer *renderer, struct point center, double radius, Ui
     filledPolygonColor(renderer, xarray, yarray, 3, color);
 }
 
+void drawplus(SDL_Renderer *renderer, struct point center, double largeradius, double smallradius, Uint32 color)
+{
+    double x = center.x;
+    double y = center.y;
+    boxColor(renderer, center.x - smallradius, center.y + largeradius, center.x + smallradius, center.y - largeradius, color);
+    boxColor(renderer, center.x - largeradius, center.y + smallradius, center.x + largeradius, center.y - smallradius, color);
+}
+
 void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radius, Uint32 nowcolor, Uint32 maincolor)
 {
-    int x = center.x;
-    int y = center.y;
+    double x = center.x;
+    double y = center.y;
     Sint16 *xarray = (Sint16 *)malloc(sizeof(Sint16) * 6);
     Sint16 *yarray = (Sint16 *)malloc(sizeof(Sint16) * 6);
     struct point firstpoint;
@@ -142,7 +158,7 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
     {
         for (int i = 0; i < 6; i++)
         {
-            double width = 6;
+            double width = 2.5;
             thickLineRGBA(renderer, xarray[i], yarray[i], xarray[(i + 1) % 6], yarray[(i + 1) % 6], width, 0, 0, 0, 0xff);
         }
     }
@@ -151,15 +167,23 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
 
     if (maincolor == neutralColor)
     {
-        filledCircleColor(renderer, center.x, center.y, radius / 3, 0xA0ffffff);
+        //  0xA0ffffff
+        filledCircleRGBA(renderer, center.x, center.y, radius / 3, 255, 255, 255, 0xA0);
     }
     if (maincolor == color1)
     {
-        boxColor(renderer, center.x - radius / 4, center.y - radius / 4, center.x + radius / 4 + 5, center.y + radius / 4 + 5, 0xff00ff00);
+        double width = radius / 5;
+        boxColor(renderer, center.x - width, center.y - width, center.x + width + 5, center.y + width + 5, 0xff00ff00);
+        //filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 255, 0, 255);
     }
     if (maincolor == color2)
     {
-        drawtriangle(renderer, center, 20, 0xff300000);
+        drawtriangle(renderer, center, 30, 0xff300000);
+        //filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 0, 0xff, 0xff);
+    }
+    if (maincolor == color3)
+    {
+        drawplus(renderer, center, 10, 30, 0xff000040);
     }
 }
 
@@ -256,9 +280,9 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
 
             int numofsoldiers = (head + i)->numofsoldiers;
             char *string = (char *)malloc(sizeof(char) * 100);
-            sprintf(string, "%d", numofsoldiers);
+            sprintf(string, " %d ", numofsoldiers);
             const char *str2 = string;
-            text(renderer, (head + i)->x_center - 7, (head + i)->y_center + 25, 20, 20, 20, 0, 0, 0, 255, str2);
+            text(renderer, (head + i)->x_center - 9, (head + i)->y_center + 52, 30, 30, 32, 0, 0, 0, 255, str2);
         }
     }
 }

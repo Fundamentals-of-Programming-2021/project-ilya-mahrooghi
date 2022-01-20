@@ -6,13 +6,15 @@
 
 #IncludeRegexTransform: 
 
-../include/myheader.h
+../include/map.h
 SDL2/SDL.h
 -
 SDL2/SDL2_gfxPrimitives.h
 -
 SDL2/SDL_image.h
 -
+
+../include/soldiers.h
 
 /home/ilya/Desktop/codes/state.io/src/main.c
 SDL2/SDL.h
@@ -35,8 +37,10 @@ time.h
 -
 math.h
 -
-myheader.h
-/home/ilya/Desktop/codes/state.io/src/myheader.h
+map.h
+/home/ilya/Desktop/codes/state.io/src/map.h
+soldiers.h
+/home/ilya/Desktop/codes/state.io/src/soldiers.h
 
 /usr/include/SDL2/SDL.h
 SDL_main.h
