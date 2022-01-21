@@ -21,25 +21,24 @@ int main()
     return 0;
   }
 
-  // IMG_Init(2);
-  ///////////// main
-  SDL_Window *sdlWindow = SDL_CreateWindow("Test_Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-
   const int FPS = 60;
 
-  //// Main
+  SDL_Window *sdlWindow = SDL_CreateWindow("Test_Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+
   SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-  SDL_Event sdlevent;
+  ////////////////////////////////////////////////////////////////
+
   int numofcolors = 50;
   Uint32 color[numofcolors][numofcolors];
   random_color_array(numofcolors, color);
   time_t t;
   srand(time(&t));
+  SDL_bool shallExit = SDL_FALSE;
+
+  // define regions
   struct point center;
   center.x = 0;
   center.y = 0;
-
-  // define regions
   struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
   int numofregions;
   headregion = polygonwindow(sdlRenderer, center, color, &numofregions);
@@ -47,7 +46,7 @@ int main()
   struct soldier *soldier = (struct soldier *)malloc(sizeof(struct soldier));
   soldier->x_center = 500;
   soldier->y_center = 500;
-  while (1)
+  while (shallExit == SDL_FALSE)
   {
     // reset the color
     SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
@@ -60,15 +59,20 @@ int main()
     soldier->x_center += 7;
     soldier->y_center += 7;
     // render presentation and SDL_Quit=
-    SDL_Delay(400);
     SDL_RenderPresent(sdlRenderer);
-    SDL_PollEvent(&sdlevent);
-    if (sdlevent.type == SDL_QUIT)
+    SDL_Delay(500);
+    SDL_Event sdlevent;
+    while (SDL_PollEvent(&sdlevent))
     {
-      break;
+      printf("+");
+      switch (sdlevent.type)
+      {
+      case SDL_QUIT:
+        shallExit = SDL_TRUE;
+        break;
+      }
     }
   }
-
   SDL_DestroyWindow(sdlWindow);
   printf("Hope see you soon for the next game:)\n");
   SDL_Quit();
