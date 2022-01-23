@@ -24,13 +24,6 @@ struct region
     Uint32 maincolor, nowcolor;
 };
 
-struct soldier
-{
-    struct region *from;
-    struct region *to;
-    double x_center, y_center;
-};
-
 void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0, int h0)
 {
     SDL_Surface *image = SDL_LoadBMP(image_path);

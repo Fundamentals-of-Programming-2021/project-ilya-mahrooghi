@@ -55,16 +55,25 @@ int main()
     changecolorofregion(headregion, numofregions);
     addsoldier(sdlRenderer, headregion, numofregions);
     printregions(sdlRenderer, numofregions, headregion);
+
     printsoldier(sdlRenderer, soldier);
-    soldier->x_center += 7;
-    soldier->y_center += 7;
+    soldier->x_center += 25;
+    if (soldier->x_center > SCREEN_WIDTH)
+    {
+      soldier->x_center = 5;
+    }
+    soldier->y_center += 25;
+    if (soldier->y_center > SCREEN_HEIGHT)
+    {
+      soldier->y_center = 5;
+    }
+
     // render presentation and SDL_Quit=
     SDL_RenderPresent(sdlRenderer);
-    SDL_Delay(500);
+    SDL_Delay(300);
     SDL_Event sdlevent;
     while (SDL_PollEvent(&sdlevent))
     {
-      printf("+");
       switch (sdlevent.type)
       {
       case SDL_QUIT:

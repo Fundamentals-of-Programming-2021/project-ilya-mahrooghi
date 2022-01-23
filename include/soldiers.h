@@ -1,3 +1,11 @@
+struct soldier
+{
+    struct region *from;
+    struct region *to;
+    double x_center, y_center;
+    double vx, vy;
+};
+
 void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
 {
     //Uint32 color = soldier->from->maincolor;
