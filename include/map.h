@@ -2,11 +2,14 @@
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <SDL2/SDL_image.h>
 
-Uint32 color1 = 0x2000A000;
-Uint32 color2 = 0x20E00000;
-Uint32 color3 = 0x200000ff;
-Uint32 backgroundColor = 0xffffffff;
-Uint32 neutralColor = 0x10000000;
+//Uint32 color1 = 0x2000A000;
+Uint32 color1 = 0x20ee04e6;
+//Uint32 color2 = 0x20E00000;
+Uint32 color2 = 0x20f0240d;
+Uint32 color3 = 0x201010f7;
+//Uint32 color3 = 0x200000ff;
+Uint32 backgroundColor = 0xff7f00ff;
+Uint32 neutralColor = 0x10b0adab;
 const double SCREEN_WIDTH = 1000;
 const double SCREEN_HEIGHT = 1000;
 
@@ -42,6 +45,13 @@ double norm(double x)
         x = -x;
     }
     return x;
+}
+
+double distance(double x0, double y0, double x1, double y1)
+{
+    double tmp1 = x0 - x1;
+    double tmp2 = y0 - y1;
+    return sqrt(tmp1 * tmp1 + tmp2 * tmp2);
 }
 
 void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0, int h0)
@@ -83,7 +93,7 @@ void random_color_array(int num, Uint32 colorarray[num][num])
         {
             int tmp;
             tmp = rand();
-            tmp %= 6;
+            tmp %= 7;
 
             switch (tmp)
             {
@@ -316,6 +326,11 @@ void changecolorofregion(struct region *head, int num)
         {
             int numofsoldiers = (head + i)->numofsoldiers;
 
+            if (numofsoldiers > 50)
+            {
+                numofsoldiers = 50;
+            }
+
             if ((head + i)->maincolor == color1)
             {
                 (head + i)->nowcolor = (head + i)->maincolor + numofsoldiers * 0x01000000 * 4;
@@ -334,4 +349,16 @@ void changecolorofregion(struct region *head, int num)
             }
         }
     }
+}
+
+struct region *findnearestregion(double x, double y, struct region *head, int numofregions)
+{
+    for (int i = 0; i < numofregions; i++)
+    {
+        if (distance(x, y, (head + i)->x_center, (head + i)->y_center) <= 20)
+        {
+            return (head + i);
+        }
+    }
+    return NULL;
 }

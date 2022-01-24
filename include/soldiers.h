@@ -1,6 +1,3 @@
-
-double speed = 15;
-
 void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
 {
     Uint32 color = soldier->color;
@@ -8,22 +5,22 @@ void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
 
     if (color == color1)
     {
-        copycolor = 0xff00E000;
+        copycolor = 0xff6ff2ac;
     }
     else if (color == color2)
     {
-        copycolor = 0xffff0000;
+        copycolor = 0xffcccc00;
     }
     else if (color == color3)
     {
-        copycolor = 0xff0000ff;
+        copycolor = 0xff6666ff;
     }
 
     double height = 17, width1 = 15, width2 = 10;
     double centerx = soldier->x_center;
     double centery = soldier->y_center;
 
-    boxColor(renderer, centerx - width1, centery - height, centerx + width1, centery + height, 0xff000000);
+    boxColor(renderer, centerx - width1, centery - height, centerx + width1, centery + height, 0xff303030);
 
     boxColor(renderer, centerx - width2, centery - height, centerx + width2, centery + height, copycolor);
 
@@ -116,37 +113,43 @@ void printsoldier2(SDL_Renderer *renderer, struct soldier *soldier)
 
 void start_of_attack(struct region *from, struct region *to)
 {
+    double speed = 10;
     from->toattacking = to;
     for (int i = 0; i < 1000; i++)
     {
-        (from->soldiers[i]).is_on = 0;
+        if (from->soldiers[i].is_on == 0)
+        {
 
-        (from->soldiers[i]).x_center = from->x_center;
-        (from->soldiers[i]).y_center = from->y_center;
+            (from->soldiers[i]).x_center = from->x_center;
+            (from->soldiers[i]).y_center = from->y_center;
 
-        from->soldiers[i].to = to;
+            from->soldiers[i].to = to;
 
-        from->soldiers[i].color = from->maincolor;
+            from->soldiers[i].color = from->maincolor;
 
-        from->soldiers[i].vx = (to->x_center - from->x_center) / speed;
-        from->soldiers[i].vy = (to->y_center - from->y_center) / speed;
+            from->soldiers[i].vx = (to->x_center - from->x_center) / speed;
+            from->soldiers[i].vy = (to->y_center - from->y_center) / speed;
+        }
     }
-    from->soldiers[0].is_on = 1;
 }
 
 void attacking(SDL_Renderer *renderer, struct region *head, int numofsoldiers)
 {
     for (int i = 0; i < numofsoldiers; i++)
     {
-        for (int j = 0; j < 100; j++)
+        for (int j = 0; j < 1000; j++)
         {
             if ((head + i)->soldiers[j].is_on == 1)
             {
+                if ((head + i)->soldiers[j].to->numofsoldiers <= 0)
+                {
+                    (head + i)->soldiers[j].to->maincolor = (head + i)->maincolor;
+                }
                 printsoldier(renderer, &((head + i)->soldiers[j]));
                 (head + i)->soldiers[j].x_center += (head + i)->soldiers[j].vx;
                 (head + i)->soldiers[j].y_center += (head + i)->soldiers[j].vy;
 
-                if (norm((head + i)->soldiers[j].x_center - (head + i)->soldiers[j].to->x_center) <= 2)
+                if (norm((head + i)->soldiers[j].x_center - (head + i)->soldiers[j].to->x_center) <= 1 && norm((head + i)->soldiers[j].y_center - (head + i)->soldiers[j].to->y_center) <= 1)
                 {
                     if ((head + i)->soldiers[j].to->maincolor != (head + i)->maincolor)
                     {
@@ -156,7 +159,6 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofsoldiers)
                     {
                         (head + i)->soldiers[j].to->numofsoldiers += 1;
                     }
-
                     (head + i)->soldiers[j].is_on = 0;
                     (head + i)->soldiers[j].x_center = (head + i)->x_center;
                     (head + i)->soldiers[j].y_center = (head + i)->y_center;
@@ -168,7 +170,7 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofsoldiers)
     {
         if ((head + i)->toattacking != NULL)
         {
-            for (int j = 0; j < 100; j++)
+            for (int j = 0; j < 1000; j++)
             {
                 if ((head + i)->soldiers[j].is_on == 0 && (head + i)->numofsoldiers > 0)
                 {

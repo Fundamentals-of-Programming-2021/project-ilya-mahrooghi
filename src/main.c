@@ -43,25 +43,28 @@ int main()
   int numofregions;
   headregion = polygonwindow(sdlRenderer, center, color, &numofregions);
 
+  // attacking of soldiers and work with mouse
   struct region *attackfrom = (struct region *)malloc(sizeof(struct region));
   struct region *attackto = (struct region *)malloc(sizeof(struct region));
+  double mouse_x, mouse_y;
 
   ////////////////////////////////////////////////////////////////////////
   while (shallExit == SDL_FALSE)
   {
-    i++;
     // reset the color
     SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
     SDL_RenderClear(sdlRenderer);
+
     // intialize the screen
     changecolorofregion(headregion, numofregions);
     addsoldier(sdlRenderer, headregion, numofregions);
     printregions(sdlRenderer, numofregions, headregion);
     attacking(sdlRenderer, headregion, numofregions);
+    SDL_RenderPresent(sdlRenderer);
     attacking(sdlRenderer, headregion, numofregions);
 
-    // render presentation and SDL_Quit=
-    SDL_RenderPresent(sdlRenderer);
+    // render presentation and events
+   // SDL_RenderPresent(sdlRenderer);
     SDL_Delay(400);
     SDL_Event sdlevent;
     while (SDL_PollEvent(&sdlevent))
@@ -71,9 +74,19 @@ int main()
       case SDL_QUIT:
         shallExit = SDL_TRUE;
         break;
-      case SDL_MOUSEMOTION:
-        int mouse_x = sdlevent.motion.x;
-        int mouse_y = sdlevent.motion.y;
+      case SDL_MOUSEBUTTONDOWN:
+        mouse_x = sdlevent.button.x;
+        mouse_y = sdlevent.button.y;
+        attackfrom = findnearestregion(mouse_x, mouse_y, headregion, numofregions);
+        break;
+      case SDL_MOUSEBUTTONUP:
+        mouse_x = sdlevent.button.x;
+        mouse_y = sdlevent.button.y;
+        attackto = findnearestregion(mouse_x, mouse_y, headregion, numofregions);
+        if (attackto != NULL && attackfrom != NULL && attackto != attackfrom)
+        {
+          start_of_attack(attackfrom, attackto);
+        }
         break;
       }
     }
