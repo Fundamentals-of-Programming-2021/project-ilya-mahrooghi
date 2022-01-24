@@ -17,12 +17,32 @@ struct point
     double x, y;
 };
 
+struct soldier
+{
+    int is_on; // is the soldier game or not
+    struct region *to;
+    Uint32 color;
+    double x_center, y_center;
+    double vx, vy;
+};
+
 struct region
 {
     double x_center, y_center;
     int numofsoldiers;
     Uint32 maincolor, nowcolor;
+    struct soldier soldiers[1000];
+    struct region *toattacking;
 };
+
+double norm(double x)
+{
+    if (x < 0)
+    {
+        x = -x;
+    }
+    return x;
+}
 
 void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0, int h0)
 {
@@ -242,6 +262,14 @@ struct region *polygonwindow(SDL_Renderer *renderer, struct point firstcenter, U
         }
     }
     *num = count;
+    for (int i = 0; i < count; i++)
+    {
+        for (int j = 0; j < 1000; j++)
+        {
+            ((head + i)->soldiers[j]).is_on = 0;
+            (head + i)->toattacking = NULL;
+        }
+    }
     return head;
 }
 

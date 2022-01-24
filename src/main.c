@@ -42,12 +42,14 @@ int main()
   struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
   int numofregions;
   headregion = polygonwindow(sdlRenderer, center, color, &numofregions);
+
+  struct region *attackfrom = (struct region *)malloc(sizeof(struct region));
+  struct region *attackto = (struct region *)malloc(sizeof(struct region));
+
   ////////////////////////////////////////////////////////////////////////
-  struct soldier *soldier = (struct soldier *)malloc(sizeof(struct soldier));
-  soldier->x_center = 500;
-  soldier->y_center = 500;
   while (shallExit == SDL_FALSE)
   {
+    i++;
     // reset the color
     SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
     SDL_RenderClear(sdlRenderer);
@@ -55,22 +57,12 @@ int main()
     changecolorofregion(headregion, numofregions);
     addsoldier(sdlRenderer, headregion, numofregions);
     printregions(sdlRenderer, numofregions, headregion);
-
-    printsoldier(sdlRenderer, soldier);
-    soldier->x_center += 25;
-    if (soldier->x_center > SCREEN_WIDTH)
-    {
-      soldier->x_center = 5;
-    }
-    soldier->y_center += 25;
-    if (soldier->y_center > SCREEN_HEIGHT)
-    {
-      soldier->y_center = 5;
-    }
+    attacking(sdlRenderer, headregion, numofregions);
+    attacking(sdlRenderer, headregion, numofregions);
 
     // render presentation and SDL_Quit=
     SDL_RenderPresent(sdlRenderer);
-    SDL_Delay(300);
+    SDL_Delay(400);
     SDL_Event sdlevent;
     while (SDL_PollEvent(&sdlevent))
     {
@@ -78,6 +70,10 @@ int main()
       {
       case SDL_QUIT:
         shallExit = SDL_TRUE;
+        break;
+      case SDL_MOUSEMOTION:
+        int mouse_x = sdlevent.motion.x;
+        int mouse_y = sdlevent.motion.y;
         break;
       }
     }
