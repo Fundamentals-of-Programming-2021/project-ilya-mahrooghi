@@ -5,18 +5,18 @@ void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
 
     if (color == color1)
     {
-        copycolor = 0xff6ff2ac;
+        copycolor = 0xffee04e6;
     }
     else if (color == color2)
     {
-        copycolor = 0xffcccc00;
+        copycolor = 0xfff0240d;
     }
     else if (color == color3)
     {
-        copycolor = 0xff6666ff;
+        copycolor = 0xff1010f7;
     }
 
-    double height = 17, width1 = 15, width2 = 10;
+    double height = 10, width1 = 12, width2 = 7;
     double centerx = soldier->x_center;
     double centery = soldier->y_center;
 
@@ -31,80 +31,23 @@ void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
     struct point center = {centerx, centery};
     if (color == color1)
     {
-        double width = 5;
-        boxColor(renderer, center.x - width, center.y - width, center.x + width, center.y + width, 0xff00ff00);
-        //filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 255, 0, 255);
+        drawtriangle(renderer, center, 5, 0xff6f176c, 0);
+        drawtriangle(renderer, center, 5, 0xff6f176c, 3.1415);
     }
     if (color == color2)
     {
-        drawtriangle(renderer, center, 10, 0xff300000);
+        drawtriangle(renderer, center, 5, 0xff300000, 0);
         //filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 0, 0xff, 0xff);
     }
     if (color == color3)
     {
-        drawplus(renderer, center, 2, 7, 0xff000040);
+       drawplus(renderer, center, 2, 5, 0xff17178D);
     }
 
     double radius = 10;
     centery = centery - height - radius + 3;
 
     filledCircleColor(renderer, centerx, centery, radius, 0xff9fd0e6);
-
-    filledCircleColor(renderer, centerx - 4, centery - 3, 3, 0xff000000);
-    filledCircleColor(renderer, centerx + 4, centery - 3, 3, 0xff000000);
-    thickLineColor(renderer, centerx - 3, centery + 4, centerx + 4, centery + 4, 2, 0xff000000);
-}
-
-void printsoldier2(SDL_Renderer *renderer, struct soldier *soldier)
-{
-    //Uint32 color = soldier->from->maincolor;
-    Uint32 color = color1;
-    Uint32 copycolor = color;
-    if (color == color1)
-    {
-        color = 0xff007000;
-    }
-    if (color == color2)
-    {
-        color = 0xff800000;
-    }
-    if (color == color3)
-    {
-        color = 0xff0000A0;
-    }
-
-    double height = 17, width1 = 15, width2 = 10, radius = 15;
-    double centerx = soldier->x_center;
-    double centery = soldier->y_center;
-
-    filledCircleColor(renderer, centerx, centery, radius, 0xff000000);
-    filledCircleColor(renderer, centerx, centery, radius - 3, 0xff8fc0d6);
-
-    double distanceoflegs = 5, leglength = 8;
-    thickLineColor(renderer, centerx - distanceoflegs, centery + height - 4, centerx - distanceoflegs, centery + height + leglength - 4, 4, 0xff000000);
-    thickLineColor(renderer, centerx + distanceoflegs, centery + height - 4, centerx + distanceoflegs, centery + height + leglength - 4, 4, 0xff000000);
-
-    struct point center = {centerx, centery};
-    if (copycolor == color1)
-    {
-        double width = 5;
-        boxColor(renderer, center.x - width, center.y - width, center.x + width, center.y + width, 0xff00ff00);
-        //filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 255, 0, 255);
-    }
-    if (copycolor == color2)
-    {
-        drawtriangle(renderer, center, 10, 0xff300000);
-        //filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 0, 0xff, 0xff);
-    }
-    if (copycolor == color3)
-    {
-        drawplus(renderer, center, 2, 7, 0xff0000A0);
-    }
-
-    radius = 10;
-    centery = centery - height - radius + 5;
-
-    filledCircleColor(renderer, centerx, centery, radius, 0xffB0E0F6);
 
     filledCircleColor(renderer, centerx - 4, centery - 3, 3, 0xff000000);
     filledCircleColor(renderer, centerx + 4, centery - 3, 3, 0xff000000);

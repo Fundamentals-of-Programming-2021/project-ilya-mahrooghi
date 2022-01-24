@@ -13,7 +13,7 @@ Uint32 neutralColor = 0x10b0adab;
 const double SCREEN_WIDTH = 1000;
 const double SCREEN_HEIGHT = 1000;
 
-int numofpoly = 11; // this is num of poly in a height of map
+int numofpoly = 10; // this is num of poly in a height of map
 
 struct point
 {
@@ -134,7 +134,7 @@ struct point rotate(struct point center, struct point torotate, double angle)
     return ans;
 }
 
-void drawtriangle(SDL_Renderer *renderer, struct point center, double radius, Uint32 color)
+void drawtriangle(SDL_Renderer *renderer, struct point center, double radius, Uint32 color, double angle)
 {
     double x = center.x;
     double y = center.y;
@@ -143,6 +143,8 @@ void drawtriangle(SDL_Renderer *renderer, struct point center, double radius, Ui
     struct point firstpoint;
     firstpoint.x = x;
     firstpoint.y = y + radius;
+
+    firstpoint = rotate(center, firstpoint, angle);
     for (int i = 0; i < 3; i++)
     {
         xarray[i] = firstpoint.x;
@@ -195,18 +197,20 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
     }
     if (maincolor == color1)
     {
-        double width = radius / 5;
-        boxColor(renderer, center.x - width, center.y - width, center.x + width + 5, center.y + width + 5, 0xff00ff00);
+        drawtriangle(renderer, center, 30, 0xff6f176c, 0);
+        drawtriangle(renderer, center, 30, 0xff6f176c, 3.1415);
+
+        //boxColor(renderer, center.x - width, center.y - width, center.x + width + 5, center.y + width + 5, 0xff6f176c);
         //filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 255, 0, 255);
     }
     if (maincolor == color2)
     {
-        drawtriangle(renderer, center, 30, 0xff300000);
+        drawtriangle(renderer, center, 30, 0xff300000, 0);
         //filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 0, 0xff, 0xff);
     }
     if (maincolor == color3)
     {
-        drawplus(renderer, center, 10, 30, 0xff000040);
+        drawplus(renderer, center, 9, 23, 0xff17178D);
     }
 }
 

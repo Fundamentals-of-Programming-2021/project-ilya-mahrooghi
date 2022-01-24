@@ -37,8 +37,8 @@ int main()
 
   // define regions
   struct point center;
-  center.x = 0;
-  center.y = 0;
+  center.x = 45;
+  center.y = -10;
   struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
   int numofregions;
   headregion = polygonwindow(sdlRenderer, center, color, &numofregions);
