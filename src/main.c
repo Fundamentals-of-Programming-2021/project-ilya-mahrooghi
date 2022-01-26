@@ -28,20 +28,17 @@ int main()
   SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
   ////////////////////////////////////////////////////////////////
 
-  int numofcolors = 50;
-  Uint32 color[numofcolors][numofcolors];
-  random_color_array(numofcolors, color);
+  Uint32 color[5][5];
+  random_color_array(color);
   time_t t;
   srand(time(&t));
   SDL_bool shallExit = SDL_FALSE;
 
   // define regions
-  struct point center;
-  center.x = 45;
-  center.y = -10;
+ 
   struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
   int numofregions;
-  headregion = polygonwindow(sdlRenderer, center, color, &numofregions);
+  headregion = polygonwindow(sdlRenderer, color, &numofregions);
 
   // attacking of soldiers and work with mouse
   struct region *attackfrom = (struct region *)malloc(sizeof(struct region));
@@ -60,12 +57,11 @@ int main()
     addsoldier(sdlRenderer, headregion, numofregions);
     printregions(sdlRenderer, numofregions, headregion);
     attacking(sdlRenderer, headregion, numofregions);
-    SDL_RenderPresent(sdlRenderer);
-    attacking(sdlRenderer, headregion, numofregions);
+    //attacking(sdlRenderer, headregion, numofregions);
 
     // render presentation and events
-   // SDL_RenderPresent(sdlRenderer);
-    SDL_Delay(400);
+    SDL_RenderPresent(sdlRenderer);
+    SDL_Delay(300);
     SDL_Event sdlevent;
     while (SDL_PollEvent(&sdlevent))
     {
