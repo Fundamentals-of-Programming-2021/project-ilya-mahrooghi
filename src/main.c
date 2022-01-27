@@ -12,6 +12,7 @@
 
 #include "map.h"
 #include "soldiers.h"
+#include "poison.h"
 
 int main()
 {
@@ -27,23 +28,25 @@ int main()
 
   SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
   ////////////////////////////////////////////////////////////////
-
-  Uint32 color[5][5];
-  random_color_array(color);
   time_t t;
   srand(time(&t));
   SDL_bool shallExit = SDL_FALSE;
 
   // define regions
- 
   struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
   int numofregions;
-  headregion = polygonwindow(sdlRenderer, color, &numofregions);
+  headregion = polygonwindow(sdlRenderer, &numofregions);
 
   // attacking of soldiers and work with mouse
   struct region *attackfrom = (struct region *)malloc(sizeof(struct region));
   struct region *attackto = (struct region *)malloc(sizeof(struct region));
   double mouse_x, mouse_y;
+
+  // poison
+  struct speedbooster *speedbooster_head = (struct speedbooster *)malloc(sizeof(struct speedbooster) * 4);
+  definespeedbooster(speedbooster_head);
+
+
 
   ////////////////////////////////////////////////////////////////////////
   while (shallExit == SDL_FALSE)
@@ -57,7 +60,8 @@ int main()
     addsoldier(sdlRenderer, headregion, numofregions);
     printregions(sdlRenderer, numofregions, headregion);
     attacking(sdlRenderer, headregion, numofregions);
-    //attacking(sdlRenderer, headregion, numofregions);
+
+    all_of_speedboosters(sdlRenderer, speedbooster_head , headregion , numofregions);
 
     // render presentation and events
     SDL_RenderPresent(sdlRenderer);

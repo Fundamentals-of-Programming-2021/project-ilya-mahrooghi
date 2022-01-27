@@ -1,3 +1,6 @@
+int speedbooster[3] = {0};
+
+
 void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
 {
 
@@ -59,7 +62,7 @@ void find_collison(SDL_Renderer *renderer, struct region *head, int numofsoldier
 {
     for (int i = 0; i < numofsoldiers; i++)
     {
-        for (int j = 0; j < 100; j++)
+        for (int j = 0; j < 200; j++)
         {
             for (int a = 0; a < 4; a++)
             {
@@ -71,9 +74,9 @@ void find_collison(SDL_Renderer *renderer, struct region *head, int numofsoldier
                         {
                             continue;
                         }
-                        else
+                        else if((head + k)->maincolor != (head + i)->maincolor)
                         {
-                            for (int t = 0; t < 100; t++)
+                            for (int t = 0; t < 200; t++)
                             {
                                 for (int b = 0; b < 4; b++)
                                 {
@@ -83,8 +86,8 @@ void find_collison(SDL_Renderer *renderer, struct region *head, int numofsoldier
                                         double y0 = (head + j)->soldiers[a][j].y_center;
                                         double x1 = (head + k)->soldiers[b][t].x_center;
                                         double y1 = (head + k)->soldiers[b][t].y_center;
-                                        double distance = 20;
-                                        if (x0 - x1 <= distance && x1 - x0 <= distance && y0 - y1 <= distance && y1 - y0 <= distance)
+                                        double distance = 10;
+                                        if (norm(x0 - x1) <= distance && norm(y0 - y1) <= distance)
                                         {
                                             //printf("+");
                                             filledCircleColor(renderer, x0, y0, 7, 0xA0000000);
@@ -126,6 +129,11 @@ void start_of_attack(struct region *from, struct region *to)
 
                 from->soldiers[k][i].vx = speed * delta_x / distance;
                 from->soldiers[k][i].vy = speed * delta_y / distance;
+                if(speedbooster[from->side] != 0)
+                {
+                    from->soldiers[k][i].vx *= 2;
+                    from->soldiers[k][i].vy *= 2;
+                }
                 double costeta = delta_y / distance;
                 double sinteta = delta_x / distance;
 
@@ -157,7 +165,7 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
                     (head + i)->soldiers[k][j].x_center += (head + i)->soldiers[k][j].vx;
                     (head + i)->soldiers[k][j].y_center += (head + i)->soldiers[k][j].vy;
 
-                    if (norm((head + i)->soldiers[k][j].x_center - (head + i)->soldiers[k][j].to->x_center) <= 45 && norm((head + i)->soldiers[k][j].y_center - (head + i)->soldiers[k][j].to->y_center) <= 45)
+                    if (norm((head + i)->soldiers[k][j].x_center - (head + i)->soldiers[k][j].to->x_center) <= 70 && norm((head + i)->soldiers[k][j].y_center - (head + i)->soldiers[k][j].to->y_center) <= 70)
                     {
                         if ((head + i)->soldiers[k][j].to->maincolor != (head + i)->maincolor)
                         {
@@ -196,7 +204,7 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
                 {
                     for (int k = 0; k < 4; k++)
                     {
-                        if ((head + i)->numofsoldiers > 0)
+                        if ((head + i)->numofsoldiers >= 0)
                         {
                             (head + i)->soldiers[k][j].is_on = 1;
                             (head + i)->numofsoldiers--;
