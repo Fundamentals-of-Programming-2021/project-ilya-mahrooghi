@@ -1,6 +1,5 @@
 int speedbooster[3] = {0};
 
-
 void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
 {
 
@@ -74,7 +73,7 @@ void find_collison(SDL_Renderer *renderer, struct region *head, int numofsoldier
                         {
                             continue;
                         }
-                        else if((head + k)->maincolor != (head + i)->maincolor)
+                        else if ((head + k)->maincolor != (head + i)->maincolor)
                         {
                             for (int t = 0; t < 200; t++)
                             {
@@ -86,10 +85,10 @@ void find_collison(SDL_Renderer *renderer, struct region *head, int numofsoldier
                                         double y0 = (head + j)->soldiers[a][j].y_center;
                                         double x1 = (head + k)->soldiers[b][t].x_center;
                                         double y1 = (head + k)->soldiers[b][t].y_center;
-                                        double distance = 10;
+                                        double distance = 9;
                                         if (norm(x0 - x1) <= distance && norm(y0 - y1) <= distance)
                                         {
-                                            //printf("+");
+                                            // printf("+");
                                             filledCircleColor(renderer, x0, y0, 7, 0xA0000000);
                                             (head + i)->soldiers[a][j].is_on = 0;
                                             (head + k)->soldiers[b][t].is_on = 0;
@@ -129,11 +128,15 @@ void start_of_attack(struct region *from, struct region *to)
 
                 from->soldiers[k][i].vx = speed * delta_x / distance;
                 from->soldiers[k][i].vy = speed * delta_y / distance;
-                if(speedbooster[from->side] != 0)
+
+                from->soldiers[k][i].current_vx = from->soldiers[k][i].vx;
+                from->soldiers[k][i].current_vy = from->soldiers[k][i].vy;
+                if (speedbooster[from->side] != 0)
                 {
-                    from->soldiers[k][i].vx *= 2;
-                    from->soldiers[k][i].vy *= 2;
+                    from->soldiers[k][i].current_vx = 2.5 * from->soldiers[k][i].vx;
+                    from->soldiers[k][i].current_vy = 2.5 * from->soldiers[k][i].vy;
                 }
+
                 double costeta = delta_y / distance;
                 double sinteta = delta_x / distance;
 
@@ -162,8 +165,8 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
                         (head + i)->soldiers[k][j].to->maincolor = (head + i)->maincolor;
                     }
                     printsoldier(renderer, &((head + i)->soldiers[k][j]));
-                    (head + i)->soldiers[k][j].x_center += (head + i)->soldiers[k][j].vx;
-                    (head + i)->soldiers[k][j].y_center += (head + i)->soldiers[k][j].vy;
+                    (head + i)->soldiers[k][j].x_center += (head + i)->soldiers[k][j].current_vx;
+                    (head + i)->soldiers[k][j].y_center += (head + i)->soldiers[k][j].current_vy;
 
                     if (norm((head + i)->soldiers[k][j].x_center - (head + i)->soldiers[k][j].to->x_center) <= 70 && norm((head + i)->soldiers[k][j].y_center - (head + i)->soldiers[k][j].to->y_center) <= 70)
                     {
@@ -200,6 +203,16 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
                         break;
                     }
                 }
+
+                if (speedbooster[(head + i)->side] != 0)
+                {
+                    for (int k = 0; k < 4; k++)
+                    {
+                        (head + i)->soldiers[k][i].current_vx = 2.5 * (head + i)->soldiers[k][i].vx;
+                        (head + i)->soldiers[k][i].current_vy = 2.5 * (head + i)->soldiers[k][i].vy;
+                    }
+                }
+                
                 if (flag == 1)
                 {
                     for (int k = 0; k < 4; k++)

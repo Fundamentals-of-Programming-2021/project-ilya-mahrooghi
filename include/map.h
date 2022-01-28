@@ -2,18 +2,17 @@
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <SDL2/SDL_image.h>
 
-// Uint32 color1 = 0x2000A000;
+// colors
 Uint32 color1 = 0x20ee04e6;
-// Uint32 color2 = 0x20E00000;
 Uint32 color2 = 0x20f0240d;
 Uint32 color3 = 0x201010f7;
-// Uint32 color3 = 0x200000ff;
 Uint32 backgroundColor = 0xff7f00ff;
 Uint32 neutralColor = 0x10b0adab;
+
 const double SCREEN_WIDTH = 1000;
 const double SCREEN_HEIGHT = 1000;
-int numofpoly = 8; // this is num of poly in a height of map
 
+int numofpoly = 8; // this is num of poly in a height of map
 ////////////////////////////////////////////////////////////////
 
 struct point
@@ -28,6 +27,7 @@ struct soldier
     Uint32 color;
     double x_center, y_center;
     double vx, vy;
+    double current_vx, current_vy;
 };
 
 struct region
@@ -85,6 +85,7 @@ void text(SDL_Renderer *m_renderer, double xp, double yp, double w, double h, in
     TTF_CloseFont(Sans);
 }
 
+///////////////////////////////////////////////////////////////////////////////
 void random_color_array(Uint32 colorarray[][5])
 {
     time_t t;
@@ -208,7 +209,7 @@ void drawplus(SDL_Renderer *renderer, struct point center, double largeradius, d
     boxColor(renderer, center.x - smallradius, center.y + largeradius, center.x + smallradius, center.y - largeradius, color);
     boxColor(renderer, center.x - largeradius, center.y + smallradius, center.x + largeradius, center.y - smallradius, color);
 }
-
+/////////////////////////////////////////////////
 void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radius, Uint32 nowcolor, Uint32 maincolor)
 {
     double x = center.x;
@@ -285,7 +286,7 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
             (head + count)->y_center = center.y;
             (head + count)->maincolor = color[i - 2][j - 2];
             (head + count)->nowcolor = color[i - 2][j - 2];
-            Uint32 nowcolor = color[i - 2][j - 2];
+            Uint32 currentcolor = color[i - 2][j - 2];
             if (color[i - 2][j - 2] != neutralColor)
             {
                 (head + count)->numofsoldiers = 10;
@@ -294,20 +295,19 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
             {
                 (head + count)->numofsoldiers = 50;
             }
-
-            count++;
-            if (nowcolor == color1)
+            if (currentcolor == color1)
             {
                 (head + count)->side = 0;
             }
-            if (nowcolor == color2)
+            if (currentcolor == color2)
             {
                 (head + count)->side = 1;
             }
-            if (nowcolor == color3)
+            if (currentcolor == color3)
             {
                 (head + count)->side = 2;
             }
+            count++;
         }
     }
 
@@ -337,7 +337,6 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
             {
                 (head + count)->numofsoldiers = 50;
             }
-            count++;
             if (nowcolor == color1)
             {
                 (head + count)->side = 0;
@@ -350,6 +349,7 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
             {
                 (head + count)->side = 2;
             }
+            count++;
         }
     }
     *num = count;

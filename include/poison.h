@@ -50,11 +50,11 @@ void change_stateofspeedbooster(struct speedbooster *head)
     }
 }
 
-void apply_speedboosters(SDL_Renderer *renderer, struct speedbooster *head_booter, struct region *headregion, int numofregion)
+void apply_speedboosters(SDL_Renderer *renderer, struct speedbooster *head_booster, struct region *headregion, int numofregion)
 {
     for (int z = 0; z < 4; z++)
     {
-        if ((head_booter + z)->is_on == 1)
+        if ((head_booster + z)->is_on == 1)
         {
             for (int i = 0; i < numofregion; i++)
             {
@@ -67,16 +67,16 @@ void apply_speedboosters(SDL_Renderer *renderer, struct speedbooster *head_boote
                             double x_region = (headregion + i)->soldiers[k][j].x_center;
                             double y_region = (headregion + i)->soldiers[k][j].y_center;
 
-                            double x_booster = (head_booter + z)->x;
-                            double y_booster = (head_booter + z)->y;
-                            if (norm(x_region - x_booster) < 30 && norm(y_region - y_booster) < 30)
+                            double x_booster = (head_booster + z)->x;
+                            double y_booster = (head_booster + z)->y;
+                            if (norm(x_region - x_booster) < 40 && norm(y_region - y_booster) < 40)
                             {
                                 if(speedbooster[(headregion + i)->side] == 0)
                                 {
-                                    int time_booter = 10;
+                                    int time_booster = 10;
                                     int tmp = (headregion + i)->side;
-                                    speedbooster[tmp] = time_booter;
-                                    (head_booter + z)->is_on = 0;
+                                    speedbooster[tmp] = time_booster;
+                                    (head_booster + z)->is_on = 0;
                                 }
                             }
                         }
