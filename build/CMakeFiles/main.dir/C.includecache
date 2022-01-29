@@ -14,7 +14,7 @@ SDL2/SDL2_gfxPrimitives.h
 SDL2/SDL_image.h
 -
 
-../include/poison.h
+../include/mixture.h
 
 ../include/soldiers.h
 
@@ -43,8 +43,8 @@ map.h
 /home/ilya/Desktop/codes/state.io/src/map.h
 soldiers.h
 /home/ilya/Desktop/codes/state.io/src/soldiers.h
-poison.h
-/home/ilya/Desktop/codes/state.io/src/poison.h
+mixture.h
+/home/ilya/Desktop/codes/state.io/src/mixture.h
 
 /usr/include/SDL2/SDL.h
 SDL_main.h

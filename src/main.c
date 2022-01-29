@@ -12,26 +12,29 @@
 
 #include "map.h"
 #include "soldiers.h"
-#include "poison.h"
+#include "mixture.h"
 
 int main()
 {
+  // check working
   if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0 || TTF_Init() < 0)
   {
     printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
     return 0;
   }
 
+  // deine window and renderer 
   const int FPS = 60;
-
   SDL_Window *sdlWindow = SDL_CreateWindow("Test_Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-
   SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-  ////////////////////////////////////////////////////////////////
+
+  // random time
   time_t t;
   srand(time(&t));
-  SDL_bool shallExit = SDL_FALSE;
 
+  // when close the window
+  SDL_bool shallExit = SDL_FALSE;
+  
   // define regions
   struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
   int numofregions;
@@ -42,11 +45,10 @@ int main()
   struct region *attackto = (struct region *)malloc(sizeof(struct region));
   double mouse_x, mouse_y;
 
-  // poison
-  struct speedbooster *speedbooster_head = (struct speedbooster *)malloc(sizeof(struct speedbooster) * 4);
-  definespeedbooster(speedbooster_head);
-
-
+  // mixtures
+  struct speedbooster *head_speedbooster = (struct speedbooster *)malloc(sizeof(struct speedbooster) * 4);
+  struct freeze *head_freeze = (struct freeze *)malloc(sizeof(struct freeze) * 4);
+  define_mixtures(head_speedbooster, head_freeze);
 
   ////////////////////////////////////////////////////////////////////////
   while (shallExit == SDL_FALSE)
@@ -61,11 +63,14 @@ int main()
     printregions(sdlRenderer, numofregions, headregion);
     attacking(sdlRenderer, headregion, numofregions);
 
-    all_of_speedboosters(sdlRenderer, speedbooster_head , headregion , numofregions);
+    // use the mixtures
+    all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, headregion, numofregions);
 
-    // render presentation and events
+    // render presentation
     SDL_RenderPresent(sdlRenderer);
     SDL_Delay(300);
+
+    // events
     SDL_Event sdlevent;
     while (SDL_PollEvent(&sdlevent))
     {

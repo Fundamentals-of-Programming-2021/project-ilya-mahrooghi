@@ -88,9 +88,6 @@ void text(SDL_Renderer *m_renderer, double xp, double yp, double w, double h, in
 ///////////////////////////////////////////////////////////////////////////////
 void random_color_array(Uint32 colorarray[][5])
 {
-    time_t t;
-    srand((unsigned)time(&t));
-
     for (int i = 0; i <= 3; i++)
     {
 

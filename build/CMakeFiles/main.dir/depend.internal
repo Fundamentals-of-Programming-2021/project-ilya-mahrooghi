@@ -3,7 +3,7 @@
 
 CMakeFiles/main.dir/src/main.c.o
  ../include/map.h
- ../include/poison.h
+ ../include/mixture.h
  ../include/soldiers.h
  /home/ilya/Desktop/codes/state.io/src/main.c
  /usr/include/SDL2/SDL.h
