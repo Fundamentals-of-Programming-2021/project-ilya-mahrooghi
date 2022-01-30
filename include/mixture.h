@@ -1,3 +1,4 @@
+// struct of mixtures
 struct speedbooster
 {
     double x;
@@ -12,15 +13,25 @@ struct freeze
     int is_on;
 };
 
-void define_mixtures(struct speedbooster *head, struct freeze *head2)
+struct inf_soldiers
+{
+    double x;
+    double y;
+    int is_on;
+};
+
+// functions
+void define_mixtures(struct speedbooster *head_speedbooster, struct freeze *head_freeze, struct inf_soldiers *head_inf_soldiers)
 {
     for (int i = 0; i < 4; i++)
     {
-        (head + i)->is_on = 0;
-        (head2 + i)->is_on = 0;
+        (head_speedbooster + i)->is_on = 0;
+        (head_freeze + i)->is_on = 0;
+        (head_inf_soldiers + i)->is_on = 0;
     }
 }
-/////////////////////////////////
+
+// show the mixtures
 void draw_speedbooster(SDL_Renderer *renderer, struct speedbooster *speedbooster)
 {
     if (speedbooster->is_on == 1)
@@ -41,26 +52,42 @@ void draw_freeze(SDL_Renderer *renderer, struct freeze *freeze)
     }
 }
 
-void print_mixtures(SDL_Renderer *renderer, struct speedbooster *head_speedbooster, struct freeze *head_freeze)
+void draw_inf_soldiers(SDL_Renderer *renderer, struct inf_soldiers *inf_soldiers)
+{
+    if (inf_soldiers->is_on == 1)
+    {
+        double x_center = inf_soldiers->x;
+        double y_center = inf_soldiers->y;
+        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//inf_soldiers.bmp", x_center, y_center, 50, 50);
+    }
+}
+
+void print_mixtures(SDL_Renderer *renderer, struct speedbooster *head_speedbooster, struct freeze *head_freeze, struct inf_soldiers *head_inf_soldiers)
 {
     for (int i = 0; i < 4; i++)
     {
         draw_speedbooster(renderer, head_speedbooster + i);
         draw_freeze(renderer, head_freeze + i);
+        draw_inf_soldiers(renderer, head_inf_soldiers + i);
     }
 }
-/////////////////////////////////
-void randomly_mixture(struct speedbooster *head_speedbooster, struct freeze *head_freeze)
+
+// logic of the mixtures
+void randomly_mixture(struct speedbooster *head_speedbooster, struct freeze *head_freeze, struct inf_soldiers *head_inf_soldiers)
 {
     for (int i = 0; i < 4; i++)
     {
+        int possibiity = 150;
         if ((head_speedbooster + i)->is_on == 0)
         {
             int tmp = rand();
-
-            if (tmp % 10 == 1)
+            // the possibiity
+            if (tmp % possibiity == 0)
             {
+                // make it on
                 (head_speedbooster + i)->is_on = 1;
+
+                // choose randomly x and y of mixture
                 int tmp2 = abs(rand() % 500);
                 int tmp3 = abs(rand() % 500);
                 (head_speedbooster + i)->x = 250 + tmp2;
@@ -70,21 +97,41 @@ void randomly_mixture(struct speedbooster *head_speedbooster, struct freeze *hea
         if ((head_freeze + i)->is_on == 0)
         {
             int tmp = rand();
-
-            if (tmp % 50 == 1)
+            // the possibiity
+            if (tmp % possibiity == 0)
             {
+                // make it on
                 (head_freeze + i)->is_on = 1;
+
+                // choose randomly x and y of mixture
                 int tmp2 = abs(rand() % 500);
                 int tmp3 = abs(rand() % 500);
                 (head_freeze + i)->x = 250 + tmp2;
                 (head_freeze + i)->y = 250 + tmp3;
             }
         }
+        if ((head_inf_soldiers + i)->is_on == 0)
+        {
+            int tmp = rand();
+            // the possibiity
+            if (tmp % possibiity == 0)
+            {
+                // make it on
+                (head_inf_soldiers + i)->is_on = 1;
+
+                // choose randomly x and y of mixture
+                int tmp2 = abs(rand() % 500);
+                int tmp3 = abs(rand() % 500);
+                (head_inf_soldiers + i)->x = 250 + tmp2;
+                (head_inf_soldiers + i)->y = 250 + tmp3;
+            }
+        }
     }
 }
 
-void apply_mixtures(struct speedbooster *head_booster, struct freeze *head_freeze, struct region *headregion, int numofregion)
+void apply_mixtures(struct speedbooster *head_booster, struct freeze *head_freeze, struct inf_soldiers *head_inf_soldiers, struct region *headregion, int numofregion)
 {
+    // search for the soldiers
     for (int i = 0; i < numofregion; i++)
     {
         for (int j = 0; j < 200; j++)
@@ -93,42 +140,72 @@ void apply_mixtures(struct speedbooster *head_booster, struct freeze *head_freez
             {
                 if ((headregion + i)->soldiers[k][j].is_on == 1)
                 {
-                    for (int z = 0; z < 4; z++)
+                    for (int z = 0; z < 4; z++) // search for the mixtures
                     {
+                        // speedbooster
                         if ((head_booster + z)->is_on == 1)
                         {
-                            double x_region = (headregion + i)->soldiers[k][j].x_center;
-                            double y_region = (headregion + i)->soldiers[k][j].y_center;
+                            // x and y of center of soldier
+                            double x_soldier = (headregion + i)->soldiers[k][j].x_center;
+                            double y_soldier = (headregion + i)->soldiers[k][j].y_center;
 
+                            // x and y of booster
                             double x_booster = (head_booster + z)->x;
                             double y_booster = (head_booster + z)->y;
-                            if (norm(x_region - x_booster) < 70 && norm(y_region - y_booster) < 70)
+
+                            if (norm(x_soldier - x_booster) < 70 && norm(y_soldier - y_booster) < 70)
                             {
-                                if (freeze[(headregion + i)->side] == 0 && speedbooster[(headregion + i)->side] == 0)
+                                int sidenum = (headregion + i)->side;
+                                if (freeze[sidenum] == 0 && speedbooster[sidenum] == 0 && inf_soldiers[sidenum] == 0)
                                 {
                                     int time_booster = 10;
-                                    int tmp = (headregion + i)->side;
-                                    speedbooster[tmp] = time_booster;
+                                    speedbooster[sidenum] = time_booster;
                                     (head_booster + z)->is_on = 0;
                                 }
                             }
                         }
-                        /////////////////////////////////
+
+                        // freeze
                         if ((head_freeze + z)->is_on == 1)
                         {
-                            double x_region = (headregion + i)->soldiers[k][j].x_center;
-                            double y_region = (headregion + i)->soldiers[k][j].y_center;
+                            // x and y of soldier
+                            double x_soldier = (headregion + i)->soldiers[k][j].x_center;
+                            double y_soldier = (headregion + i)->soldiers[k][j].y_center;
 
+                            // x and y of freeze
                             double x_freeze = (head_freeze + z)->x;
                             double y_freeze = (head_freeze + z)->y;
-                            if (norm(x_region - x_freeze) < 70 && norm(y_region - y_freeze) < 70)
+
+                            if (norm(x_soldier - x_freeze) < 70 && norm(y_soldier - y_freeze) < 70)
                             {
-                                if (freeze[(headregion + i)->side] == 0 && speedbooster[(headregion + i)->side] == 0)
+                                int sidenum = (headregion + i)->side;
+                                if (freeze[sidenum] == 0 && speedbooster[sidenum] == 0 && inf_soldiers[sidenum] == 0)
                                 {
                                     int time_booster = 10;
-                                    int tmp = (headregion + i)->side;
-                                    freeze[tmp] = time_booster;
+                                    freeze[sidenum] = time_booster;
                                     (head_freeze + z)->is_on = 0;
+                                }
+                            }
+                        }
+                        // inf_soldiers
+                        if ((head_inf_soldiers + z)->is_on == 1)
+                        {
+                            // x and y of soldier
+                            double x_soldier = (headregion + i)->soldiers[k][j].x_center;
+                            double y_soldier = (headregion + i)->soldiers[k][j].y_center;
+
+                            // x and y of freeze
+                            double x_inf_soldiers = (head_inf_soldiers + z)->x;
+                            double y_inf_soldiers = (head_inf_soldiers + z)->y;
+
+                            if (norm(x_soldier - x_inf_soldiers) < 70 && norm(y_soldier - y_inf_soldiers) < 70)
+                            {
+                                int sidenum = (headregion + i)->side;
+                                if (freeze[sidenum] == 0 && speedbooster[sidenum] == 0 && inf_soldiers[sidenum] == 0)
+                                {
+                                    int time_booster = 20;
+                                    inf_soldiers[sidenum] = time_booster;
+                                    (head_inf_soldiers + z)->is_on = 0;
                                 }
                             }
                         }
@@ -139,7 +216,7 @@ void apply_mixtures(struct speedbooster *head_booster, struct freeze *head_freez
     }
 }
 
-void decrease_timeofmixture()
+void decrease_timeofmixtures()
 {
     for (int i = 0; i < 3; i++)
     {
@@ -151,13 +228,18 @@ void decrease_timeofmixture()
         {
             freeze[i]--;
         }
+        if (inf_soldiers[i] > 0)
+        {
+            inf_soldiers[i]--;
+        }
     }
 }
 
-void all_of_mixtures(SDL_Renderer *renderer, struct speedbooster *head_speedbooster, struct freeze *head_freeze, struct region *head_region, int numofregion)
+// function to use all of above functions
+void all_of_mixtures(SDL_Renderer *renderer, struct speedbooster *head_speedbooster, struct freeze *head_freeze, struct inf_soldiers *head_inf_soldiers, struct region *head_region, int numofregion)
 {
-    apply_mixtures(head_speedbooster, head_freeze, head_region, numofregion);
-    print_mixtures(renderer, head_speedbooster, head_freeze);
-    decrease_timeofmixture();
-    randomly_mixture(head_speedbooster, head_freeze);
+    apply_mixtures(head_speedbooster, head_freeze, head_inf_soldiers, head_region, numofregion);
+    print_mixtures(renderer, head_speedbooster, head_freeze, head_inf_soldiers);
+    decrease_timeofmixtures();
+    randomly_mixture(head_speedbooster, head_freeze, head_inf_soldiers);
 }

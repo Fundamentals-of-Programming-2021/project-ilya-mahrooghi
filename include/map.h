@@ -9,12 +9,19 @@ Uint32 color3 = 0x201010f7;
 Uint32 backgroundColor = 0xff7f00ff;
 Uint32 neutralColor = 0x10b0adab;
 
+// screen size
 const double SCREEN_WIDTH = 1000;
 const double SCREEN_HEIGHT = 1000;
 
-int numofpoly = 8; // this is num of poly in a height of map
-////////////////////////////////////////////////////////////////
+// this is num of poly in a height of map
+int numofpoly = 8;
 
+// array of mixture
+int speedbooster[3] = {0};
+int freeze[3] = {0};
+int inf_soldiers[3] = {0};
+
+// structs
 struct point
 {
     double x, y;
@@ -22,7 +29,7 @@ struct point
 
 struct soldier
 {
-    int is_on; // is the soldier game or not
+    int is_on; // is the soldier in game or not
     struct region *to;
     Uint32 color;
     double x_center, y_center;
@@ -40,6 +47,7 @@ struct region
     int side;
 };
 
+// functions:
 double norm(double x)
 {
     if (x < 0)
@@ -56,6 +64,7 @@ double distance(double x0, double y0, double x1, double y1)
     return sqrt(tmp1 * tmp1 + tmp2 * tmp2);
 }
 
+// functions of showing the image and text
 void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0, int h0)
 {
     SDL_Surface *image = SDL_LoadBMP(image_path);
@@ -85,7 +94,7 @@ void text(SDL_Renderer *m_renderer, double xp, double yp, double w, double h, in
     TTF_CloseFont(Sans);
 }
 
-///////////////////////////////////////////////////////////////////////////////
+// function for color of the regions
 void random_color_array(Uint32 colorarray[][5])
 {
     for (int i = 0; i <= 3; i++)
@@ -166,6 +175,7 @@ void random_color_array(Uint32 colorarray[][5])
     }
 }
 
+// graphic functions
 struct point rotate(struct point center, struct point torotate, double angle)
 {
     struct point ans;
@@ -206,7 +216,8 @@ void drawplus(SDL_Renderer *renderer, struct point center, double largeradius, d
     boxColor(renderer, center.x - smallradius, center.y + largeradius, center.x + smallradius, center.y - largeradius, color);
     boxColor(renderer, center.x - largeradius, center.y + smallradius, center.x + largeradius, center.y - smallradius, color);
 }
-/////////////////////////////////////////////////
+
+// draw region function
 void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radius, Uint32 nowcolor, Uint32 maincolor)
 {
     double x = center.x;
@@ -258,6 +269,7 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
     }
 }
 
+// define the array of regions
 struct region *polygonwindow(SDL_Renderer *renderer, int *num)
 {
     Uint32 color[5][5];
@@ -367,37 +379,25 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
     return head;
 }
 
+// change properties of regions
 void addsoldier(SDL_Renderer *renderer, struct region *head, int num)
 {
     for (int i = 0; i < num; i++)
     {
         if ((head + i)->maincolor != backgroundColor && (head + i)->maincolor != neutralColor)
-            if (((head + i)->numofsoldiers) < 70)
-            {
-                ((head + i)->numofsoldiers) += 1;
-            }
-    }
-}
-
-void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
-{
-    double radius = (SCREEN_WIDTH / numofpoly) + 1;
-    for (int i = 0; i < numofregions; i++)
-    {
-        if ((head + i)->maincolor != backgroundColor)
         {
-            struct point center;
-            center.x = (head + i)->x_center;
-            center.y = (head + i)->y_center;
-            Uint32 nowcolor = (head + i)->nowcolor;
-            Uint32 maincolor = (head + i)->maincolor;
-            drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
-
-            int numofsoldiers = (head + i)->numofsoldiers;
-            char *string = (char *)malloc(sizeof(char) * 100);
-            sprintf(string, " %d ", numofsoldiers);
-            const char *str2 = string;
-            text(renderer, (head + i)->x_center - 9, (head + i)->y_center + 52, 30, 30, 32, 0, 0, 0, 255, str2);
+            int sidenum = (head + i)->side;
+            if (inf_soldiers[sidenum] == 0)
+            {
+                if (((head + i)->numofsoldiers) < 70)
+                {
+                    ((head + i)->numofsoldiers) += 1;
+                }
+            }
+            else
+            {
+                (head + i)->numofsoldiers += 1;
+            }
         }
     }
 }
@@ -435,6 +435,31 @@ void changecolorofregion(struct region *head, int num)
     }
 }
 
+// print all of regions
+void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
+{
+    double radius = (SCREEN_WIDTH / numofpoly) + 1;
+    for (int i = 0; i < numofregions; i++)
+    {
+        if ((head + i)->maincolor != backgroundColor)
+        {
+            struct point center;
+            center.x = (head + i)->x_center;
+            center.y = (head + i)->y_center;
+            Uint32 nowcolor = (head + i)->nowcolor;
+            Uint32 maincolor = (head + i)->maincolor;
+            drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+
+            int numofsoldiers = (head + i)->numofsoldiers;
+            char *string = (char *)malloc(sizeof(char) * 100);
+            sprintf(string, " %d ", numofsoldiers);
+            const char *str2 = string;
+            text(renderer, (head + i)->x_center - 9, (head + i)->y_center + 52, 30, 30, 32, 0, 0, 0, 255, str2);
+        }
+    }
+}
+
+// find the region function
 struct region *findnearestregion(double x, double y, struct region *head, int numofregions)
 {
     for (int i = 0; i < numofregions; i++)

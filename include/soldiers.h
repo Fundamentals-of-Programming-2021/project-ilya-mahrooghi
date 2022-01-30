@@ -1,6 +1,4 @@
-int speedbooster[3] = {0};
-int freeze[3] = {0};
-
+// functions
 void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
 {
     // define color

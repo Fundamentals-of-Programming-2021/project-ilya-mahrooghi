@@ -23,7 +23,7 @@ int main()
     return 0;
   }
 
-  // deine window and renderer 
+  // deine window and renderer
   const int FPS = 60;
   SDL_Window *sdlWindow = SDL_CreateWindow("Test_Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
   SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
@@ -34,7 +34,7 @@ int main()
 
   // when close the window
   SDL_bool shallExit = SDL_FALSE;
-  
+
   // define regions
   struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
   int numofregions;
@@ -48,7 +48,8 @@ int main()
   // mixtures
   struct speedbooster *head_speedbooster = (struct speedbooster *)malloc(sizeof(struct speedbooster) * 4);
   struct freeze *head_freeze = (struct freeze *)malloc(sizeof(struct freeze) * 4);
-  define_mixtures(head_speedbooster, head_freeze);
+  struct inf_soldiers *head_inf_soldiers = (struct inf_soldiers *)malloc(sizeof(struct inf_soldiers) * 4);
+  define_mixtures(head_speedbooster, head_freeze, head_inf_soldiers);
 
   ////////////////////////////////////////////////////////////////////////
   while (shallExit == SDL_FALSE)
@@ -64,7 +65,7 @@ int main()
     attacking(sdlRenderer, headregion, numofregions);
 
     // use the mixtures
-    all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, headregion, numofregions);
+    all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, headregion, numofregions);
 
     // render presentation
     SDL_RenderPresent(sdlRenderer);
@@ -96,6 +97,8 @@ int main()
       }
     }
   }
+
+  // destroy window and quit
   SDL_DestroyWindow(sdlWindow);
   printf("Hope see you soon for the next game:)\n");
   SDL_Quit();
