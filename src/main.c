@@ -49,7 +49,8 @@ int main()
   struct speedbooster *head_speedbooster = (struct speedbooster *)malloc(sizeof(struct speedbooster) * 4);
   struct freeze *head_freeze = (struct freeze *)malloc(sizeof(struct freeze) * 4);
   struct inf_soldiers *head_inf_soldiers = (struct inf_soldiers *)malloc(sizeof(struct inf_soldiers) * 4);
-  define_mixtures(head_speedbooster, head_freeze, head_inf_soldiers);
+  struct more_soldiers *head_more_soldiers = (struct more_soldiers *)malloc(sizeof(struct more_soldiers) * 4);
+  define_mixtures(head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers);
 
   ////////////////////////////////////////////////////////////////////////
   while (shallExit == SDL_FALSE)
@@ -65,7 +66,7 @@ int main()
     attacking(sdlRenderer, headregion, numofregions);
 
     // use the mixtures
-    all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, headregion, numofregions);
+    all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers, headregion, numofregions);
 
     // render presentation
     SDL_RenderPresent(sdlRenderer);

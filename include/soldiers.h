@@ -93,8 +93,9 @@ void find_collison(SDL_Renderer *renderer, struct region *head, int numofsoldier
                                         double y1 = (head + k)->soldiers[b][t].y_center;
 
                                         // define distance and if statement
-                                        double distance = 9;
-                                        if (norm(x0 - x1) <= distance && norm(y0 - y1) <= distance)
+                                        // double distance = 15;
+                                        // if (norm(x0 - x1) <= distance && norm(y0 - y1) <= distance)
+                                        if (distance(x0, y0, x1, y1) <= 30)
                                         {
                                             // showing the collison
                                             filledCircleColor(renderer, x0, y0, 7, 0xA0000000);
@@ -178,9 +179,9 @@ void start_of_attack(struct region *from, struct region *to)
 
 void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
 {
-    // first is there any collison
-    find_collison(renderer, head, numofregion);
 
+    // find collison
+    find_collison(renderer, head, numofregion);
     // find soldiers and move them
     for (int i = 0; i < numofregion; i++)
     {

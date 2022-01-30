@@ -11,7 +11,7 @@ Uint32 neutralColor = 0x10b0adab;
 
 // screen size
 const double SCREEN_WIDTH = 1000;
-const double SCREEN_HEIGHT = 1000;
+const double SCREEN_HEIGHT = 1200;
 
 // this is num of poly in a height of map
 int numofpoly = 8;
@@ -20,6 +20,7 @@ int numofpoly = 8;
 int speedbooster[3] = {0};
 int freeze[3] = {0};
 int inf_soldiers[3] = {0};
+int more_soldiers[3] = {0};
 
 // structs
 struct point
@@ -97,6 +98,7 @@ void text(SDL_Renderer *m_renderer, double xp, double yp, double w, double h, in
 // function for color of the regions
 void random_color_array(Uint32 colorarray[][5])
 {
+    // define all of them neutralColor or backgroundColor
     for (int i = 0; i <= 3; i++)
     {
 
@@ -128,6 +130,7 @@ void random_color_array(Uint32 colorarray[][5])
         }
     }
 
+    // for each of side have on color in map
     for (int i = 0; i < 3; i++)
     {
         Uint32 color;
@@ -277,7 +280,7 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
 
     struct point firstcenter;
     firstcenter.x = 25;
-    firstcenter.y = -20;
+    firstcenter.y = 10;
     struct region *head = (struct region *)malloc(sizeof(struct region) * 1000);
     int count = 0;
     double radius = (SCREEN_WIDTH / (numofpoly)) + 1;
@@ -386,17 +389,33 @@ void addsoldier(SDL_Renderer *renderer, struct region *head, int num)
     {
         if ((head + i)->maincolor != backgroundColor && (head + i)->maincolor != neutralColor)
         {
+            // numoo g soldiers that we should add
+            int plus = 1;
+
+            // num of side of the region
             int sidenum = (head + i)->side;
+
+            if (more_soldiers[sidenum] > 0)
+            {
+                plus *= 3;
+            }
+
             if (inf_soldiers[sidenum] == 0)
             {
                 if (((head + i)->numofsoldiers) < 70)
                 {
-                    ((head + i)->numofsoldiers) += 1;
+                    ((head + i)->numofsoldiers) += plus;
+
+                    // if it has more soldiers
+                    if ((head + i)->numofsoldiers > 70)
+                    {
+                        (head + i)->numofsoldiers = 70;
+                    }
                 }
             }
             else
             {
-                (head + i)->numofsoldiers += 1;
+                (head + i)->numofsoldiers += plus;
             }
         }
     }
@@ -454,7 +473,7 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             char *string = (char *)malloc(sizeof(char) * 100);
             sprintf(string, " %d ", numofsoldiers);
             const char *str2 = string;
-            text(renderer, (head + i)->x_center - 9, (head + i)->y_center + 52, 30, 30, 32, 0, 0, 0, 255, str2);
+            text(renderer, (head + i)->x_center - 15, (head + i)->y_center + 52, 40, 30, 32, 0, 0, 0, 255, str2);
         }
     }
 }
