@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-../include/map.h
+../include/game/map.h
 SDL2/SDL.h
 -
 SDL2/SDL2_gfxPrimitives.h
@@ -14,9 +14,13 @@ SDL2/SDL2_gfxPrimitives.h
 SDL2/SDL_image.h
 -
 
-../include/mixture.h
+../include/game/mixture.h
 
-../include/soldiers.h
+../include/game/soldiers.h
+
+../include/general.h
+
+../include/menu/menu.h
 
 /home/ilya/Desktop/codes/state.io/src/main.c
 SDL2/SDL.h
@@ -45,6 +49,10 @@ soldiers.h
 /home/ilya/Desktop/codes/state.io/src/soldiers.h
 mixture.h
 /home/ilya/Desktop/codes/state.io/src/mixture.h
+menu.h
+/home/ilya/Desktop/codes/state.io/src/menu.h
+general.h
+/home/ilya/Desktop/codes/state.io/src/general.h
 
 /usr/include/SDL2/SDL.h
 SDL_main.h
