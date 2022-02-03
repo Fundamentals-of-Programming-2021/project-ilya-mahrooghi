@@ -3,9 +3,9 @@
 #include <SDL2/SDL_image.h>
 
 // colors
-Uint32 color1 = 0x20ee04e6;
-Uint32 color2 = 0x20f0240d;
-Uint32 color3 = 0x201010f7;
+Uint32 color1 = 0x209b2d71;
+Uint32 color2 = 0x20926c43;
+Uint32 color3 = 0x203543c0;
 Uint32 backgroundColor = 0xff7f00ff;
 Uint32 neutralColor = 0x10b0adab;
 
@@ -41,7 +41,7 @@ struct soldier
 struct region
 {
     double x_center, y_center;
-    int numofsoldiers;
+    double numofsoldiers;
     Uint32 maincolor, nowcolor;
     struct soldier soldiers[4][200];
     struct region *toattacking;
@@ -77,6 +77,7 @@ void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0,
 
     SDL_Rect texture_rect = {.x = x0, .y = y0, .w = w0, .h = h0};
     SDL_RenderCopy(renderer, texture, NULL, &texture_rect);
+    SDL_DestroyTexture(texture);
 }
 
 void text(SDL_Renderer *m_renderer, double xp, double yp, double w, double h, int fontsize, int R, int G, int B, int A, const char *S)
@@ -252,24 +253,29 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
     if (maincolor == neutralColor)
     {
         //  0xA0ffffff
-        filledCircleRGBA(renderer, center.x, center.y, radius / 4, 255, 255, 255, 0xA0);
+        // filledCircleRGBA(renderer, center.x, center.y, radius / 4, 255, 255, 255, 0xA0);
+        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//moon.bmp", center.x - 36, center.y - 30, 80, 80);
     }
     if (maincolor == color1)
     {
-        drawtriangle(renderer, center, 30, 0xff6f176c, 0);
-        drawtriangle(renderer, center, 30, 0xff6f176c, 3.1415);
+        // drawtriangle(renderer, center, 30, 0xff6f176c, 0);
+        // drawtriangle(renderer, center, 30, 0xff6f176c, 3.1415);
+
+        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//neptune.bmp", center.x - 36, center.y - 30, 80, 80);
 
         // boxColor(renderer, center.x - width, center.y - width, center.x + width + 5, center.y + width + 5, 0xff6f176c);
         // filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 255, 0, 255);
     }
     if (maincolor == color2)
     {
-        drawtriangle(renderer, center, 30, 0xff300000, 0);
+        // drawtriangle(renderer, center, 30, 0xff300000, 0);
+        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//earth.bmp", center.x - 36, center.y - 30, 80, 80);
         // filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 0, 0xff, 0xff);
     }
     if (maincolor == color3)
     {
-        drawplus(renderer, center, 9, 23, 0xff17178D);
+        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//venus.bmp", center.x - 36, center.y - 30, 80, 80);
+        // drawplus(renderer, center, 9, 23, 0xff17178D);
     }
 }
 
@@ -299,7 +305,6 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
             (head + count)->y_center = center.y;
             (head + count)->maincolor = color[i - 2][j - 2];
             (head + count)->nowcolor = color[i - 2][j - 2];
-            Uint32 currentcolor = color[i - 2][j - 2];
             if (color[i - 2][j - 2] != neutralColor)
             {
                 (head + count)->numofsoldiers = 10;
@@ -308,6 +313,8 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
             {
                 (head + count)->numofsoldiers = 50;
             }
+
+            Uint32 currentcolor = color[i - 2][j - 2];
             if (currentcolor == color1)
             {
                 (head + count)->side = 0;
@@ -350,15 +357,17 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
             {
                 (head + count)->numofsoldiers = 50;
             }
-            if (nowcolor == color1)
+
+            Uint32 currentcolor = color[i + 2][j - 2];
+            if (currentcolor == color1)
             {
                 (head + count)->side = 0;
             }
-            if (nowcolor == color2)
+            if (currentcolor == color2)
             {
                 (head + count)->side = 1;
             }
-            if (nowcolor == color3)
+            if (currentcolor == color3)
             {
                 (head + count)->side = 2;
             }
@@ -377,6 +386,7 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
                 (head + i)->soldiers[k][j].x_center = (head + i)->x_center;
                 (head + i)->soldiers[k][j].y_center = (head + i)->y_center;
                 (head + i)->soldiers[k][j].color = (head + i)->maincolor;
+                (head + i)->soldiers[k][j].to = NULL;
             }
         }
     }
@@ -391,14 +401,14 @@ void addsoldier(SDL_Renderer *renderer, struct region *head, int num)
         if ((head + i)->maincolor != backgroundColor && (head + i)->maincolor != neutralColor)
         {
             // num of soldiers that we should add
-            int plus = 1;
+            double plus = 0.18;
 
             // num of side of the region
             int sidenum = (head + i)->side;
 
             if (more_soldiers[sidenum] > 0)
             {
-                plus = 3;
+                plus *= 3;
             }
 
             if (inf_soldiers[sidenum] == 0)
@@ -455,6 +465,26 @@ void changecolorofregion(struct region *head, int num)
     }
 }
 
+void updatesides(struct region *region, int num)
+{
+    for (int i = 0; i < num; i++)
+    {
+        Uint32 color = (region + i)->maincolor;
+        if (color == color1)
+        {
+            (region + i)->side = 0;
+        }
+        if (color == color2)
+        {
+            (region + i)->side = 1;
+        }
+        if (color == color3)
+        {
+            (region + i)->side = 2;
+        }
+    }
+}
+
 // print all of regions
 void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
 {
@@ -475,6 +505,8 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             sprintf(string, " %d ", numofsoldiers);
             const char *str2 = string;
             text(renderer, (head + i)->x_center - 15, (head + i)->y_center + 52, 40, 30, 32, 0, 0, 0, 255, str2);
+            sprintf(string, " %d ", (head + i)->side);
+            text(renderer, (head + i)->x_center - 15, (head + i)->y_center - 60, 40, 30, 32, 0, 0, 0, 255, str2);
         }
     }
 }

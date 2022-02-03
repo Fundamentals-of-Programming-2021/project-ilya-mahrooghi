@@ -6,5 +6,5 @@ C_FLAGS = -g
 
 C_DEFINES = 
 
-C_INCLUDES = -I/usr/include/SDL2 -I/home/ilya/Desktop/codes/state.io/include/game -I/home/ilya/Desktop/codes/state.io/include/menu -I/home/ilya/Desktop/codes/state.io/include 
+C_INCLUDES = -I/usr/include/SDL2 -I/home/ilya/Desktop/codes/state.io/include/game -I/home/ilya/Desktop/codes/state.io/include/menu -I/home/ilya/Desktop/codes/state.io/include/AI -I/home/ilya/Desktop/codes/state.io/include 
 

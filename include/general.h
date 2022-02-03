@@ -1,13 +1,9 @@
-void game()
+void game(int sidenum)
 {
     // deine window and renderer
     const int FPS = 60;
     SDL_Window *sdlWindow = SDL_CreateWindow("State.io", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
     SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
-
-    // random time
-    time_t t;
-    srand(time(&t));
 
     // define regions
     struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
@@ -33,18 +29,24 @@ void game()
         SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(sdlRenderer);
 
+        showimage(sdlRenderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//background.bmp", 0, 0, 1000, 1000);
+
         // intialize the screen
+        updatesides(headregion, numofregions);
         changecolorofregion(headregion, numofregions);
         addsoldier(sdlRenderer, headregion, numofregions);
         printregions(sdlRenderer, numofregions, headregion);
         attacking(sdlRenderer, headregion, numofregions);
+
+        // AI
+        // playbots(sidenum, headregion, numofregions);
 
         // use the mixtures
         all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers, headregion, numofregions);
 
         // render presentation
         SDL_RenderPresent(sdlRenderer);
-        SDL_Delay(300);
+        SDL_Delay(40);
 
         // events
         SDL_Event sdlevent;
@@ -68,7 +70,10 @@ void game()
                 attackto = findnearestregion(mouse_x, mouse_y, headregion, numofregions);
                 if (attackto != NULL && attackfrom != NULL && attackto != attackfrom)
                 {
-                    start_of_attack(attackfrom, attackto);
+                    if (attackfrom->side == sidenum)
+                    {
+                        start_of_attack(attackfrom, attackto);
+                    }
                 }
                 break;
             }
@@ -234,6 +239,7 @@ void menu()
 
     while (shallExit == SDL_FALSE)
     {
+        SDL_RenderClear(sdlRenderer);
         // show menu
         show_background(sdlRenderer);
         show_mainmenu(sdlRenderer);
@@ -267,7 +273,7 @@ void menu()
                 if (nearnewgame(newgame, mouse_x, mouse_y))
                 {
                     SDL_DestroyWindow(sdlWindow);
-                    game();
+                    game(1);
                     return;
                 }
             }

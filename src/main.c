@@ -14,6 +14,7 @@
 #include "soldiers.h"
 #include "mixture.h"
 #include "menu.h"
+#include "AI.h"
 #include "general.h"
 
 int main()
@@ -24,9 +25,13 @@ int main()
     printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
     return 0;
   }
-  game();
-  //menu();
 
+  // random time
+  time_t t;
+  srand(time(&t));
+
+  // menu();
+  game(1);
   SDL_Quit();
   return 0;
 }

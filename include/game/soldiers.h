@@ -18,7 +18,7 @@ void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
     }
 
     // define size and center
-    double height = 7, width1 = 4, width2 = 6;
+    double height = 3, width1 = 3, width2 = 5;
     double centerx = soldier->x_center;
     double centery = soldier->y_center;
 
@@ -27,7 +27,7 @@ void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
     boxColor(renderer, centerx - width2, centery - height, centerx + width2, centery + height, copycolor);
 
     // legs
-    double distanceoflegs = 5, leglength = 5;
+    double distanceoflegs = 2 ,leglength = 2;
     thickLineColor(renderer, centerx - distanceoflegs, centery + height, centerx - distanceoflegs, centery + height + leglength, 2, 0xff000000);
     thickLineColor(renderer, centerx + distanceoflegs, centery + height, centerx + distanceoflegs, centery + height + leglength, 2, 0xff000000);
 
@@ -49,7 +49,7 @@ void printsoldier(SDL_Renderer *renderer, struct soldier *soldier)
     }
 
     // head
-    double radius = 5;
+    double radius = 2;
     centery = centery - height - radius + 3;
     filledCircleColor(renderer, centerx, centery, radius, 0xff9fd0e6);
 
@@ -95,7 +95,7 @@ void find_collison(SDL_Renderer *renderer, struct region *head, int numofsoldier
                                         // define distance and if statement
                                         // double distance = 15;
                                         // if (norm(x0 - x1) <= distance && norm(y0 - y1) <= distance)
-                                        if (distance(x0, y0, x1, y1) <= 30)
+                                        if (distance(x0, y0, x1, y1) <= 10)
                                         {
                                             // showing the collison
                                             filledCircleColor(renderer, x0, y0, 7, 0xA0000000);
@@ -126,7 +126,7 @@ void find_collison(SDL_Renderer *renderer, struct region *head, int numofsoldier
 
 void start_of_attack(struct region *from, struct region *to)
 {
-    double speed = 50; // speed of soldiers
+    double speed = 10; // speed of soldiers
     // define the attacking in struct
     from->toattacking = to;
 
@@ -149,8 +149,8 @@ void start_of_attack(struct region *from, struct region *to)
                 double distance = sqrt(delta_x * delta_x + delta_y * delta_y);
 
                 // define speed
-                from->soldiers[k][i].vx = speed * delta_x / distance;
-                from->soldiers[k][i].vy = speed * delta_y / distance;
+                from->soldiers[k][i].vx = speed * (delta_x / distance);
+                from->soldiers[k][i].vy = speed * (delta_y / distance);
 
                 // define the speed after speeedbooster
                 from->soldiers[k][i].current_vx = from->soldiers[k][i].vx;
@@ -180,7 +180,8 @@ void start_of_attack(struct region *from, struct region *to)
 void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
 {
     // find collison
-    find_collison(renderer, head, numofregion);
+   // find_collison(renderer, head, numofregion);
+
     // find soldiers and move them
     for (int i = 0; i < numofregion; i++)
     {
@@ -204,10 +205,10 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
                     }
 
                     // check is enemy arrived to target region
-                    if (distance((head + i)->soldiers[k][j].x_center, (head + i)->soldiers[k][j].y_center, (head + i)->soldiers[k][j].to->x_center, (head + i)->soldiers[k][j].to->y_center) <= 70)
+                    if (distance((head + i)->soldiers[k][j].x_center, (head + i)->soldiers[k][j].y_center, (head + i)->soldiers[k][j].to->x_center, (head + i)->soldiers[k][j].to->y_center) <= 45)
                     {
                         // check the target region is enemy or not and then change the numofsoldiers
-                        if ((head + i)->soldiers[k][j].to->maincolor != (head + i)->maincolor)
+                        if ((head + i)->soldiers[k][j].to->maincolor != (head + i)->soldiers[k][j].color)
                         {
                             (head + i)->soldiers[k][j].to->numofsoldiers -= 1;
                         }
@@ -222,12 +223,12 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
                         // get back to home
                         (head + i)->soldiers[k][j].x_center = (head + i)->x_center;
                         (head + i)->soldiers[k][j].y_center = (head + i)->y_center;
-                    }
-
-                    // check that if the enemy region destroyed or not
-                    if ((head + i)->soldiers[k][j].to->numofsoldiers <= 0)
-                    {
-                        (head + i)->soldiers[k][j].to->maincolor = (head + i)->maincolor;
+                        // check that if the enemy region destroyed or not
+                        if ((head + i)->soldiers[k][j].to->numofsoldiers <= 0)
+                        {
+                            (head + i)->soldiers[k][j].to->maincolor = (head + i)->soldiers[k][j].color;
+                            (head + i)->soldiers[k][j].to->side = (head + i)->side;
+                        }
                     }
                 }
             }
@@ -299,7 +300,7 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
     for (int i = 0; i < numofregion; i++)
     {
         // if you dont have soldier you cant attack
-        if ((head + i)->numofsoldiers <= 0)
+        if ((head + i)->numofsoldiers < 1)
         {
             (head + i)->toattacking = NULL;
         }

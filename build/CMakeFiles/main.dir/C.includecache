@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+../include/AI/AI.h
+
 ../include/game/map.h
 SDL2/SDL.h
 -
@@ -51,6 +53,8 @@ mixture.h
 /home/ilya/Desktop/codes/state.io/src/mixture.h
 menu.h
 /home/ilya/Desktop/codes/state.io/src/menu.h
+AI.h
+/home/ilya/Desktop/codes/state.io/src/AI.h
 general.h
 /home/ilya/Desktop/codes/state.io/src/general.h
 

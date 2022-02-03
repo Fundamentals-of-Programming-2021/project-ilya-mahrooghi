@@ -13,6 +13,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/include/SDL2"
   "../include/game"
   "../include/menu"
+  "../include/AI"
   "../include"
   )
 
