@@ -41,7 +41,7 @@ struct soldier
 struct region
 {
     double x_center, y_center;
-    double numofsoldiers;
+    int numofsoldiers;
     Uint32 maincolor, nowcolor;
     struct soldier soldiers[4][200];
     struct region *toattacking;
@@ -401,7 +401,7 @@ void addsoldier(SDL_Renderer *renderer, struct region *head, int num)
         if ((head + i)->maincolor != backgroundColor && (head + i)->maincolor != neutralColor)
         {
             // num of soldiers that we should add
-            double plus = 0.18;
+            int plus = 1;
 
             // num of side of the region
             int sidenum = (head + i)->side;

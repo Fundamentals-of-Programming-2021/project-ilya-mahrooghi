@@ -96,7 +96,7 @@ void randomly_mixture(struct speedbooster *head_speedbooster, struct freeze *hea
 {
     for (int i = 0; i < 4; i++)
     {
-        int possibiity = 40000;
+        int possibiity = 300;
 
         // speedbooster
         if ((head_speedbooster + i)->is_on == 0)
@@ -201,7 +201,7 @@ void apply_mixtures(struct speedbooster *head_booster, struct freeze *head_freez
                                 int sidenum = (headregion + i)->side;
                                 if (freeze[sidenum] == 0 && speedbooster[sidenum] == 0 && inf_soldiers[sidenum] == 0 && more_soldiers[sidenum] == 0)
                                 {
-                                    int time_booster = 10;
+                                    int time_booster = 50;
                                     speedbooster[sidenum] = time_booster;
                                     (head_booster + z)->is_on = 0;
                                 }
@@ -247,7 +247,7 @@ void apply_mixtures(struct speedbooster *head_booster, struct freeze *head_freez
                                 int sidenum = (headregion + i)->side;
                                 if (freeze[sidenum] == 0 && speedbooster[sidenum] == 0 && inf_soldiers[sidenum] == 0 && more_soldiers[sidenum] == 0)
                                 {
-                                    int time_booster = 30;
+                                    int time_booster = 60;
                                     inf_soldiers[sidenum] = time_booster;
                                     (head_inf_soldiers + z)->is_on = 0;
                                 }
@@ -270,7 +270,7 @@ void apply_mixtures(struct speedbooster *head_booster, struct freeze *head_freez
                                 int sidenum = (headregion + i)->side;
                                 if (freeze[sidenum] == 0 && speedbooster[sidenum] == 0 && inf_soldiers[sidenum] == 0 && more_soldiers[sidenum] == 0)
                                 {
-                                    int time_booster = 15;
+                                    int time_booster = 40;
                                     more_soldiers[sidenum] = time_booster;
                                     (head_more_soldiers + z)->is_on = 0;
                                 }

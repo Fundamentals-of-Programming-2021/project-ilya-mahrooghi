@@ -23,6 +23,8 @@ void game(int sidenum)
     define_mixtures(head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers);
 
     ////////////////////////////////////////////////////////////////////////
+    int counterof_addsoldier = 0;
+    int counterof_AI = 0;
     while (1)
     {
         // reset the color
@@ -34,19 +36,31 @@ void game(int sidenum)
         // intialize the screen
         updatesides(headregion, numofregions);
         changecolorofregion(headregion, numofregions);
-        addsoldier(sdlRenderer, headregion, numofregions);
+        if (counterof_addsoldier == 5)
+        {
+            counterof_addsoldier = 0;
+            addsoldier(sdlRenderer, headregion, numofregions);
+        }
         printregions(sdlRenderer, numofregions, headregion);
         attacking(sdlRenderer, headregion, numofregions);
 
         // AI
-        // playbots(sidenum, headregion, numofregions);
+        if (counterof_AI == 20)
+        {
+            counterof_AI = 0;
+           // playbots(sidenum, headregion, numofregions);
+        }
 
         // use the mixtures
         all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers, headregion, numofregions);
 
+        // add counters
+        counterof_AI++;
+        counterof_addsoldier++;
+
         // render presentation
         SDL_RenderPresent(sdlRenderer);
-        SDL_Delay(40);
+        SDL_Delay(90);
 
         // events
         SDL_Event sdlevent;
@@ -68,9 +82,10 @@ void game(int sidenum)
                 mouse_x = sdlevent.button.x;
                 mouse_y = sdlevent.button.y;
                 attackto = findnearestregion(mouse_x, mouse_y, headregion, numofregions);
+
                 if (attackto != NULL && attackfrom != NULL && attackto != attackfrom)
                 {
-                    if (attackfrom->side == sidenum)
+                    // if (attackfrom->side == sidenum)
                     {
                         start_of_attack(attackfrom, attackto);
                     }
