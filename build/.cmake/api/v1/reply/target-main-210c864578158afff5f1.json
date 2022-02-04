@@ -25,7 +25,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 8,
+				"line" : 9,
 				"parent" : 0
 			},
 			{
@@ -57,6 +57,12 @@
 				"file" : 0,
 				"line" : 7,
 				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 8,
+				"parent" : 0
 			}
 		]
 	},
@@ -66,7 +72,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g  "
+					"fragment" : " "
 				}
 			],
 			"includes" : 
@@ -89,6 +95,10 @@
 				},
 				{
 					"backtrace" : 6,
+					"path" : "/home/ilya/Desktop/codes/state.io/include/endofgame"
+				},
+				{
+					"backtrace" : 7,
 					"path" : "/home/ilya/Desktop/codes/state.io/include"
 				}
 			],
@@ -104,10 +114,6 @@
 	{
 		"commandFragments" : 
 		[
-			{
-				"fragment" : "-g",
-				"role" : "flags"
-			},
 			{
 				"fragment" : "",
 				"role" : "flags"

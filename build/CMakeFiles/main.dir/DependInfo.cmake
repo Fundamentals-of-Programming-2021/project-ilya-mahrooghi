@@ -14,6 +14,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "../include/game"
   "../include/menu"
   "../include/AI"
+  "../include/endofgame"
   "../include"
   )
 
