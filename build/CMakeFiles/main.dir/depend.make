@@ -7,6 +7,7 @@ CMakeFiles/main.dir/src/main.c.o: ../include/game/map.h
 CMakeFiles/main.dir/src/main.c.o: ../include/game/mixture.h
 CMakeFiles/main.dir/src/main.c.o: ../include/game/soldiers.h
 CMakeFiles/main.dir/src/main.c.o: ../include/general.h
+CMakeFiles/main.dir/src/main.c.o: ../include/menu/choosemap.h
 CMakeFiles/main.dir/src/main.c.o: ../include/menu/leaderboard.h
 CMakeFiles/main.dir/src/main.c.o: ../include/menu/menu.h
 CMakeFiles/main.dir/src/main.c.o: ../src/main.c

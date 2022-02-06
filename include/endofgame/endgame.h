@@ -126,7 +126,7 @@ void adduser_or_change(char *user[], int points[], int *index, char *playername,
 int readfile(char *users[], int points[])
 {
     FILE *file;
-    file = fopen("//home//ilya//Desktop//codes//state.io//files//leaderboard.txt", "r");
+    file = fopen("..//files//leaderboard.txt", "r");
     int index = 0;
     while (!feof(file))
     {
@@ -145,7 +145,7 @@ int readfile(char *users[], int points[])
 void changefile(char *users[], int points[], int index)
 {
     FILE *file;
-    file = fopen("//home//ilya//Desktop//codes//state.io//files//leaderboard.txt", "w");
+    file = fopen("..//files//leaderboard.txt", "w");
     for (int i = 0; i < index; i++)
     {
         fprintf(file, "%s %d", users[i], points[i]);

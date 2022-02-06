@@ -222,7 +222,7 @@ void drawplus(SDL_Renderer *renderer, struct point center, double largeradius, d
 }
 
 // draw region function
-void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radius, Uint32 nowcolor, Uint32 maincolor)
+void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radius, Uint32 nowcolor, Uint32 maincolor, int speedboosterflag)
 {
     double x = center.x;
     double y = center.y;
@@ -249,6 +249,11 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
 
     filledPolygonColor(renderer, xarray, yarray, 6, nowcolor);
 
+    if (speedboosterflag)
+    {
+        showimage(renderer, "..//photo//game//poison//fire.bmp", center.x - 47, center.y - 39, 100, 100);
+    }
+
     if (maincolor == neutralColor)
     {
         showimage(renderer, "..//photo//game//background//moon.bmp", center.x - 34, center.y - 26, 76, 76);
@@ -268,10 +273,12 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
 }
 
 // define the array of regions
-struct region *polygonwindow(SDL_Renderer *renderer, int *num)
+struct region *polygonwindow(SDL_Renderer *renderer, int *num, Uint32 color[5][5], int randflag)
 {
-    Uint32 color[5][5];
-    random_color_array(color);
+    if (randflag == 1)
+    {
+        random_color_array(color);
+    }
 
     struct point firstcenter;
     firstcenter.x = 25;
@@ -494,7 +501,7 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             center.y = (head + i)->y_center;
             Uint32 nowcolor = (head + i)->nowcolor;
             Uint32 maincolor = (head + i)->maincolor;
-            drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+            drawpolygonregion(renderer, center, radius, nowcolor, maincolor, 0);
             int tmpside = (head + i)->side;
             if ((head + i)->maincolor != neutralColor && freeze[tmpside] > 0)
             {
@@ -502,17 +509,17 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             }
             if ((head + i)->maincolor != neutralColor && speedbooster[tmpside] > 0)
             {
-                showimage(renderer, "..//photo//game//poison//fire.bmp", center.x - 47, center.y - 37, 100, 100);
-                drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+                // showimage(renderer, "..//photo//game//poison//fire.bmp", center.x - 47, center.y - 37, 100, 100);
+                drawpolygonregion(renderer, center, radius, nowcolor, maincolor, 1);
             }
             if ((head + i)->maincolor != neutralColor && inf_soldiers[tmpside] > 0)
             {
-                drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+                // drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
                 showimage(renderer, "..//photo//game//poison//waves.bmp", center.x - 47, center.y - 37, 100, 100);
             }
             if ((head + i)->maincolor != neutralColor && more_soldiers[tmpside] > 0)
             {
-                drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+                // drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
                 showimage(renderer, "..//photo//game//poison//more.bmp", center.x - 47, center.y - 40, 100, 100);
             }
 
@@ -521,8 +528,8 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             sprintf(string, " %d ", numofsoldiers);
             const char *str2 = string;
             text(renderer, (head + i)->x_center - 15, (head + i)->y_center + 52, 40, 30, 32, 0, 0, 0, 255, str2);
-            sprintf(string, " %d ", (head + i)->side);
-            text(renderer, (head + i)->x_center - 15, (head + i)->y_center - 60, 40, 30, 32, 0, 0, 0, 255, str2);
+            // sprintf(string, " %d ", (head + i)->side);
+            // text(renderer, (head + i)->x_center - 15, (head + i)->y_center - 60, 40, 30, 32, 0, 0, 0, 255, str2);
         }
     }
 }
@@ -538,4 +545,25 @@ struct region *findnearestregion(double x, double y, struct region *head, int nu
         }
     }
     return NULL;
+}
+
+// reset the poisons
+void resetpotions()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        speedbooster[i] = 0;
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        freeze[i] = 0;
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        inf_soldiers[i] = 0;
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        more_soldiers[i] = 0;
+    }
 }

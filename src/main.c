@@ -16,6 +16,7 @@
 #include "endgame.h"
 #include "menu.h"
 #include "leaderboard.h"
+#include "choosemap.h"
 #include "AI.h"
 #include "general.h"
 
@@ -46,7 +47,6 @@ int main()
     }
   }
   free(playername);
-
   SDL_Quit();
   TTF_Quit();
   return 0;

@@ -1,4 +1,4 @@
-int game(int sidenum)
+int game(int sidenum, Uint32 color[5][5], int randomflag)
 {
     // deine window and renderer
     const int FPS = 60;
@@ -8,7 +8,7 @@ int game(int sidenum)
     // define regions
     struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
     int numofregions;
-    headregion = polygonwindow(sdlRenderer, &numofregions);
+    headregion = polygonwindow(sdlRenderer, &numofregions, color, randomflag);
 
     // attacking of soldiers and work with mouse
     struct region *attackfrom = (struct region *)malloc(sizeof(struct region));
@@ -48,15 +48,6 @@ int game(int sidenum)
         // use the mixtures
         all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers, headregion, numofregions);
 
-        tmp = sideofwinner(headregion, numofregions);
-        if (tmp != -1)
-        {
-            SDL_Delay(300);
-            SDL_DestroyRenderer(sdlRenderer);
-            SDL_DestroyWindow(sdlWindow);
-            return tmp;
-        }
-
         // AI
         if (counterof_AI == 20)
         {
@@ -73,6 +64,37 @@ int game(int sidenum)
 
         SDL_Delay(90);
 
+        // is the end of game or not?
+        tmp = sideofwinner(headregion, numofregions);
+        if (tmp != -1)
+        {
+            // reset the color
+            SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
+            SDL_RenderClear(sdlRenderer);
+
+            showimage(sdlRenderer, "..//photo//game//background//background.bmp", 0, 0, 1000, 1200);
+
+            // intialize the screen
+            updatesides(headregion, numofregions);
+            changecolorofregion(headregion, numofregions);
+            if (counterof_addsoldier == 5)
+            {
+                counterof_addsoldier = 0;
+                addsoldier(sdlRenderer, headregion, numofregions);
+            }
+            printregions(sdlRenderer, numofregions, headregion);
+            attacking(sdlRenderer, headregion, numofregions);
+
+            // use the mixtures
+            all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers, headregion, numofregions);
+            SDL_RenderPresent(sdlRenderer);
+            resetpotions();
+            SDL_Delay(300);
+            SDL_DestroyRenderer(sdlRenderer);
+            SDL_DestroyWindow(sdlWindow);
+            return tmp;
+        }
+
         // events
         SDL_Event sdlevent;
         while (SDL_PollEvent(&sdlevent))
@@ -80,6 +102,7 @@ int game(int sidenum)
             switch (sdlevent.type)
             {
             case SDL_QUIT:
+                resetpotions();
                 SDL_DestroyRenderer(sdlRenderer);
                 SDL_DestroyWindow(sdlWindow);
                 return -1;
@@ -303,6 +326,85 @@ int leader_board()
     }
 }
 
+int choose_map()
+{
+    // window and renderer
+    SDL_Window *sdlWindow = SDL_CreateWindow("State.io", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, MENU_SCREEN_WIDTH, MENU_SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+    SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+
+    // work with mouse
+    double mouse_x, mouse_y;
+
+    // color array
+    Uint32 color[5][5];
+    int mapnum = 0;
+
+    struct button *random = (struct button *)malloc(sizeof(struct button));
+    struct button *start = (struct button *)malloc(sizeof(struct button));
+    struct button *savedmap = (struct button *)malloc(sizeof(struct button));
+    define_random(random);
+    define_start(start);
+    define_savedmap(savedmap);
+    while (1)
+    {
+        SDL_RenderClear(sdlRenderer);
+
+        // show background
+        showimage(sdlRenderer, "..//photo//selectmap//background.bmp", 0, 0, 1440, 810);
+
+        // show menu
+        show_random(sdlRenderer, random);
+        show_start(sdlRenderer, start);
+        show_savedmap(sdlRenderer, savedmap);
+
+        // show default maps
+        showmap(sdlRenderer, mapnum);
+
+        // render presentation
+        SDL_RenderPresent(sdlRenderer);
+
+        // events
+        SDL_Event sdlevent;
+        while (SDL_PollEvent(&sdlevent))
+        {
+            switch (sdlevent.type)
+            {
+            case SDL_QUIT:
+                SDL_DestroyRenderer(sdlRenderer);
+                SDL_DestroyWindow(sdlWindow);
+                return -1;
+                break;
+            case SDL_MOUSEMOTION:
+                mouse_x = sdlevent.button.x;
+                mouse_y = sdlevent.button.y;
+                zoom_resume_start(random, start, savedmap, mouse_x, mouse_y);
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                mouse_x = sdlevent.button.x;
+                mouse_y = sdlevent.button.y;
+                changemapnum(mouse_x, mouse_y, &mapnum);
+                if (near_button(random, mouse_x, mouse_y))
+                {
+                    SDL_DestroyRenderer(sdlRenderer);
+                    SDL_DestroyWindow(sdlWindow);
+                    int tmp = game(1, color, 1);
+                    return tmp;
+                }
+                if (near_button(start, mouse_x, mouse_y))
+                {
+                    gotocolor(mapnum, color);
+                    SDL_DestroyRenderer(sdlRenderer);
+                    SDL_DestroyWindow(sdlWindow);
+                    int tmp = game(1, color, 0);
+                    return tmp;
+                }
+            }
+        }
+    }
+    SDL_DestroyRenderer(sdlRenderer);
+    SDL_DestroyWindow(sdlWindow);
+}
+
 int menu(char *playername)
 {
     // window and renderer
@@ -365,7 +467,7 @@ int menu(char *playername)
                 {
                     SDL_DestroyRenderer(sdlRenderer);
                     SDL_DestroyWindow(sdlWindow);
-                    winner = game(1);
+                    winner = choose_map(1);
                     if (winner == 0)
                     {
                         changeleaderboard("neptune", 1);

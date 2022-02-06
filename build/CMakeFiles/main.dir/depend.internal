@@ -8,6 +8,7 @@ CMakeFiles/main.dir/src/main.c.o
  ../include/game/mixture.h
  ../include/game/soldiers.h
  ../include/general.h
+ ../include/menu/choosemap.h
  ../include/menu/leaderboard.h
  ../include/menu/menu.h
  /home/ilya/Desktop/codes/state.io/src/main.c

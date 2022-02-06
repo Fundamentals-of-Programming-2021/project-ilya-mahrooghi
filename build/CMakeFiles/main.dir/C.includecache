@@ -24,6 +24,8 @@ SDL2/SDL_image.h
 
 ../include/general.h
 
+../include/menu/choosemap.h
+
 ../include/menu/leaderboard.h
 
 ../include/menu/menu.h
@@ -61,6 +63,8 @@ menu.h
 /home/ilya/Desktop/codes/state.io/src/menu.h
 leaderboard.h
 /home/ilya/Desktop/codes/state.io/src/leaderboard.h
+choosemap.h
+/home/ilya/Desktop/codes/state.io/src/choosemap.h
 AI.h
 /home/ilya/Desktop/codes/state.io/src/AI.h
 general.h
