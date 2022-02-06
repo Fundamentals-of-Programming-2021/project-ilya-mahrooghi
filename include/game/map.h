@@ -69,7 +69,6 @@ double distance(double x0, double y0, double x1, double y1)
 void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0, int h0)
 {
     SDL_Surface *image = SDL_LoadBMP(image_path);
-
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, image);
 
     SDL_FreeSurface(image);
@@ -82,7 +81,7 @@ void showimage(SDL_Renderer *renderer, char *image_path, int x0, int y0, int w0,
 
 void text(SDL_Renderer *m_renderer, double xp, double yp, double w, double h, int fontsize, int R, int G, int B, int A, const char *S)
 {
-    TTF_Font *Sans = TTF_OpenFont("//home//ilya//Desktop//codes//state.io//fonts//GothicA1-Regular.ttf", fontsize);
+    TTF_Font *Sans = TTF_OpenFont("..//fonts//GothicA1-Regular.ttf", fontsize);
     SDL_Color textcolor = {R, G, B, A};
     SDL_Surface *surfaceMessage = TTF_RenderText_Solid(Sans, S, textcolor);
     SDL_Texture *Message = SDL_CreateTextureFromSurface(m_renderer, surfaceMessage);
@@ -93,8 +92,8 @@ void text(SDL_Renderer *m_renderer, double xp, double yp, double w, double h, in
     Message_rect.w = w;
     Message_rect.h = h;
     SDL_RenderCopy(m_renderer, Message, NULL, &Message_rect);
-    SDL_DestroyTexture(Message);
     TTF_CloseFont(Sans);
+    SDL_DestroyTexture(Message);
 }
 
 // function for color of the regions
@@ -252,30 +251,19 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
 
     if (maincolor == neutralColor)
     {
-        //  0xA0ffffff
-        // filledCircleRGBA(renderer, center.x, center.y, radius / 4, 255, 255, 255, 0xA0);
-        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//moon.bmp", center.x - 36, center.y - 30, 80, 80);
+        showimage(renderer, "..//photo//game//background//moon.bmp", center.x - 34, center.y - 26, 76, 76);
     }
     if (maincolor == color1)
     {
-        // drawtriangle(renderer, center, 30, 0xff6f176c, 0);
-        // drawtriangle(renderer, center, 30, 0xff6f176c, 3.1415);
-
-        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//neptune.bmp", center.x - 36, center.y - 30, 80, 80);
-
-        // boxColor(renderer, center.x - width, center.y - width, center.x + width + 5, center.y + width + 5, 0xff6f176c);
-        // filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 255, 0, 255);
+        showimage(renderer, "..//photo//game//background//neptune.bmp", center.x - 34, center.y - 26, 76, 76);
     }
     if (maincolor == color2)
     {
-        // drawtriangle(renderer, center, 30, 0xff300000, 0);
-        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//earth.bmp", center.x - 36, center.y - 30, 80, 80);
-        // filledCircleRGBA(renderer, center.x, center.y, radius / 3, 0, 0, 0xff, 0xff);
+        showimage(renderer, "..//photo//game//background//earth.bmp", center.x - 34, center.y - 26, 76, 76);
     }
     if (maincolor == color3)
     {
-        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//venus.bmp", center.x - 36, center.y - 30, 80, 80);
-        // drawplus(renderer, center, 9, 23, 0xff17178D);
+        showimage(renderer, "..//photo//game//background//venus.bmp", center.x - 34, center.y - 26, 76, 76);
     }
 }
 
@@ -314,18 +302,22 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
                 (head + count)->numofsoldiers = 50;
             }
 
-            Uint32 currentcolor = color[i - 2][j - 2];
+            Uint32 currentcolor = (head + count)->maincolor;
             if (currentcolor == color1)
             {
                 (head + count)->side = 0;
             }
-            if (currentcolor == color2)
+            else if (currentcolor == color2)
             {
                 (head + count)->side = 1;
             }
-            if (currentcolor == color3)
+            else if (currentcolor == color3)
             {
                 (head + count)->side = 2;
+            }
+            else
+            {
+                (head + count)->side = -1;
             }
             count++;
         }
@@ -358,7 +350,7 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
                 (head + count)->numofsoldiers = 50;
             }
 
-            Uint32 currentcolor = color[i + 2][j - 2];
+            Uint32 currentcolor = (head + count)->maincolor;
             if (currentcolor == color1)
             {
                 (head + count)->side = 0;
@@ -370,6 +362,10 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num)
             if (currentcolor == color3)
             {
                 (head + count)->side = 2;
+            }
+            else
+            {
+                (head + count)->side = -1;
             }
             count++;
         }
@@ -499,6 +495,26 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             Uint32 nowcolor = (head + i)->nowcolor;
             Uint32 maincolor = (head + i)->maincolor;
             drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+            int tmpside = (head + i)->side;
+            if ((head + i)->maincolor != neutralColor && freeze[tmpside] > 0)
+            {
+                showimage(renderer, "..//photo//game//poison//freezed.bmp", center.x - 40, center.y - 36, 90, 90);
+            }
+            if ((head + i)->maincolor != neutralColor && speedbooster[tmpside] > 0)
+            {
+                showimage(renderer, "..//photo//game//poison//fire.bmp", center.x - 47, center.y - 37, 100, 100);
+                drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+            }
+            if ((head + i)->maincolor != neutralColor && inf_soldiers[tmpside] > 0)
+            {
+                drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+                showimage(renderer, "..//photo//game//poison//waves.bmp", center.x - 47, center.y - 37, 100, 100);
+            }
+            if ((head + i)->maincolor != neutralColor && more_soldiers[tmpside] > 0)
+            {
+                drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
+                showimage(renderer, "..//photo//game//poison//more.bmp", center.x - 47, center.y - 40, 100, 100);
+            }
 
             int numofsoldiers = (head + i)->numofsoldiers;
             char *string = (char *)malloc(sizeof(char) * 100);

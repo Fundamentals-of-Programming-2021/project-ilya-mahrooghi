@@ -33,12 +33,12 @@ void define_leaderboard(struct button *leaderboard)
 // show and print
 void show_background(SDL_Renderer *renderer)
 {
-    showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//menu//background.bmp", 0, 0, 1440, 810);
+    showimage(renderer, "..//photo//menu//background.bmp", 0, 0, 1440, 810);
 }
 
 void show_mainmenu(SDL_Renderer *renderer)
 {
-    showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//menu//main-menu.bmp", 0, 0, 1440, 810);
+    showimage(renderer, "..//photo//menu//main-menu.bmp", 0, 0, 1440, 810);
 }
 
 void show_newgame(SDL_Renderer *renderer, struct button *newgame)
@@ -55,7 +55,7 @@ void show_newgame(SDL_Renderer *renderer, struct button *newgame)
         width += 2 * zooming;
         height += 2 * zooming;
     }
-    showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//menu//new_game.bmp", x_center, y_center, width, height);
+    showimage(renderer, "..//photo//menu//new_game.bmp", x_center, y_center, width, height);
 }
 
 void show_resume(SDL_Renderer *renderer, struct button *resume)
@@ -72,7 +72,7 @@ void show_resume(SDL_Renderer *renderer, struct button *resume)
         width += 2 * zooming;
         height += 2 * zooming;
     }
-    showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//menu//resume.bmp", x_center, y_center, width, height);
+    showimage(renderer, "..//photo//menu//resume.bmp", x_center, y_center, width, height);
 }
 
 void show_leaderboard(SDL_Renderer *renderer, struct button *leaderboard)
@@ -89,13 +89,22 @@ void show_leaderboard(SDL_Renderer *renderer, struct button *leaderboard)
         width += 2 * zooming;
         height += 2 * zooming;
     }
-    showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//menu//leaderboard.bmp", x_center, y_center, width, height);
+    showimage(renderer, "..//photo//menu//leaderboard.bmp", x_center, y_center, width, height);
 }
 
 ////////////////////////////////////////////////////////////////
 int nearnewgame(struct button *newgame, double mouse_x, double mouse_y)
 {
-    if (norm(mouse_x - (newgame->x + 150) <= 150 && norm(mouse_y - (newgame->y + 50)) <= 50))
+    if (norm(mouse_x - (newgame->x + 150)) <= 150 && norm(mouse_y - (newgame->y + 50)) <= 50)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int nearleaderboard(struct button *leaderboard, double mouse_x, double mouse_y)
+{
+    if (norm(mouse_x - (leaderboard->x + 150)) <= 150 && norm(mouse_y - (leaderboard->y + 50)) <= 50)
     {
         return 1;
     }
@@ -105,7 +114,7 @@ int nearnewgame(struct button *newgame, double mouse_x, double mouse_y)
 void zoombuttons(struct button *newgame, struct button *resume, struct button *leaderboard, double mouse_x, double mouse_y)
 {
     // newgame
-    if (norm(mouse_x - (newgame->x + 150) <= 150 && norm(mouse_y - (newgame->y + 50)) <= 50))
+    if (norm(mouse_x - (newgame->x + 150)) <= 150 && norm(mouse_y - (newgame->y + 50)) <= 50)
     {
         newgame->zoom = 1;
     }
@@ -115,7 +124,7 @@ void zoombuttons(struct button *newgame, struct button *resume, struct button *l
     }
 
     // resume
-    if (norm(mouse_x - (resume->x + 150) <= 150 && norm(mouse_y - (resume->y + 50)) <= 50))
+    if (norm(mouse_x - (resume->x + 150)) <= 150 && norm(mouse_y - (resume->y + 50)) <= 50)
     {
         resume->zoom = 1;
     }
@@ -125,7 +134,7 @@ void zoombuttons(struct button *newgame, struct button *resume, struct button *l
     }
 
     // leaderboard
-    if (norm(mouse_x - (leaderboard->x + 150) <= 150 && norm(mouse_y - (leaderboard->y + 50)) <= 50))
+    if (norm(mouse_x - (leaderboard->x + 150)) <= 150 && norm(mouse_y - (leaderboard->y + 50)) <= 50)
     {
         leaderboard->zoom = 1;
     }

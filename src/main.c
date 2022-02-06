@@ -13,7 +13,9 @@
 #include "map.h"
 #include "soldiers.h"
 #include "mixture.h"
+#include "endgame.h"
 #include "menu.h"
+#include "leaderboard.h"
 #include "AI.h"
 #include "general.h"
 
@@ -30,8 +32,22 @@ int main()
   time_t t;
   srand(time(&t));
 
-  // menu();
-  game(1);
+  // end of program
+  int endofprogram = 0;
+
+  //scan player name
+  char *playername = (char *)malloc(sizeof(char) * 200);
+  playername = getname(playername);
+  if (playername != NULL)
+  {
+    while (!endofprogram)
+    {
+      endofprogram = menu(playername);
+    }
+  }
+  free(playername);
+
   SDL_Quit();
+  TTF_Quit();
   return 0;
 }

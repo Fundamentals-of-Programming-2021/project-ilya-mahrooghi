@@ -1,4 +1,4 @@
-void game(int sidenum)
+int game(int sidenum)
 {
     // deine window and renderer
     const int FPS = 60;
@@ -25,13 +25,14 @@ void game(int sidenum)
     ////////////////////////////////////////////////////////////////////////
     int counterof_addsoldier = 0;
     int counterof_AI = 0;
+    int tmp = -1;
     while (1)
     {
         // reset the color
         SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(sdlRenderer);
 
-        showimage(sdlRenderer, "//home//ilya//Desktop//codes//state.io//photo//game//background//background.bmp", 0, 0, 1000, 1000);
+        showimage(sdlRenderer, "..//photo//game//background//background.bmp", 0, 0, 1000, 1200);
 
         // intialize the screen
         updatesides(headregion, numofregions);
@@ -44,15 +45,24 @@ void game(int sidenum)
         printregions(sdlRenderer, numofregions, headregion);
         attacking(sdlRenderer, headregion, numofregions);
 
+        // use the mixtures
+        all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers, headregion, numofregions);
+
+        tmp = sideofwinner(headregion, numofregions);
+        if (tmp != -1)
+        {
+            SDL_Delay(300);
+            SDL_DestroyRenderer(sdlRenderer);
+            SDL_DestroyWindow(sdlWindow);
+            return tmp;
+        }
+
         // AI
         if (counterof_AI == 20)
         {
             counterof_AI = 0;
-           // playbots(sidenum, headregion, numofregions);
+            // playbots(sidenum, headregion, numofregions);
         }
-
-        // use the mixtures
-        all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers, headregion, numofregions);
 
         // add counters
         counterof_AI++;
@@ -60,6 +70,7 @@ void game(int sidenum)
 
         // render presentation
         SDL_RenderPresent(sdlRenderer);
+
         SDL_Delay(90);
 
         // events
@@ -69,9 +80,9 @@ void game(int sidenum)
             switch (sdlevent.type)
             {
             case SDL_QUIT:
+                SDL_DestroyRenderer(sdlRenderer);
                 SDL_DestroyWindow(sdlWindow);
-                SDL_Quit();
-                return;
+                return -1;
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 mouse_x = sdlevent.button.x;
@@ -96,13 +107,16 @@ void game(int sidenum)
     }
 }
 
-char *getname(SDL_Window *sdlWindow, SDL_Renderer *sdlRenderer)
+char *getname(char *string)
 {
+    // window and renderer
+    SDL_Window *sdlWindow = SDL_CreateWindow("State.io", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, MENU_SCREEN_WIDTH, MENU_SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+    SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+
     // when close the window
     SDL_bool shallExit = SDL_FALSE;
 
     // string to return
-    char *string = (char *)malloc(sizeof(char) * 100);
     string[0] = '\0';
 
     // mouse
@@ -121,22 +135,20 @@ char *getname(SDL_Window *sdlWindow, SDL_Renderer *sdlRenderer)
         SDL_RenderClear(sdlRenderer);
 
         // show menu
-        showimage(sdlRenderer, "//home//ilya//Desktop//codes//state.io//photo//menu//getname.bmp", 0, 0, 1440, 810);
+        showimage(sdlRenderer, "..//photo//menu//getname.bmp", 0, 0, 1440, 810);
 
         // string
         int length = strlen(string);
-        text(sdlRenderer, 580, 420, length * 30, 30, 30, 0, 0, 0, 255, string);
-
+        text(sdlRenderer, 710 - length * 10, 420, length * 30, 30, 30, 0, 0, 0, 255, string);
         // pointer of end of text
         if (flag)
         {
-            vlineRGBA(sdlRenderer, 580 + length * 30, 420, 448, 0, 0, 0, 255);
+            vlineRGBA(sdlRenderer, 710 + length * 20, 420, 448, 0, 0, 0, 255);
         }
 
         // render presentation
         SDL_RenderPresent(sdlRenderer);
 
-        SDL_Delay(200);
         // sdl events
         SDL_Event sdlevent;
         while (SDL_PollEvent(&sdlevent))
@@ -146,7 +158,10 @@ char *getname(SDL_Window *sdlWindow, SDL_Renderer *sdlRenderer)
             switch (sdlevent.type)
             {
             case SDL_QUIT:
-                shallExit = SDL_TRUE;
+                SDL_DestroyRenderer(sdlRenderer);
+                SDL_DestroyWindow(sdlWindow);
+                free(sdlWindow);
+                return NULL;
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 mouse_x = sdlevent.button.x;
@@ -170,7 +185,12 @@ char *getname(SDL_Window *sdlWindow, SDL_Renderer *sdlRenderer)
                     switch (sdlevent.key.keysym.sym)
                     {
                     case SDLK_RETURN:
-                        return string;
+                        if (strlen(string) > 0)
+                        {
+                            SDL_DestroyRenderer(sdlRenderer);
+                            SDL_DestroyWindow(sdlWindow);
+                            return string;
+                        }
                         break;
                     case SDLK_SPACE:
                         character = ' ';
@@ -186,6 +206,7 @@ char *getname(SDL_Window *sdlWindow, SDL_Renderer *sdlRenderer)
                         }
                         break;
                     case SDLK_BACKSPACE:
+                        character = ' ';
                         if (length > 0)
                         {
                             string[length - 1] = '\0';
@@ -200,7 +221,7 @@ char *getname(SDL_Window *sdlWindow, SDL_Renderer *sdlRenderer)
                     }
                     if (strlen(string) <= 10)
                     {
-                        if ((character >= 'A' && character <= 'Z') || (character >= 'a' && character <= 'z') || character == ' ')
+                        if ((character >= 'A' && character <= 'Z') || (character >= 'a' && character <= 'z') || (character >= '0' && character <= '9') || character == '-' || character == '_')
                         {
                             if (capslock)
                             {
@@ -219,12 +240,9 @@ char *getname(SDL_Window *sdlWindow, SDL_Renderer *sdlRenderer)
             }
         }
     }
-    SDL_DestroyWindow(sdlWindow);
-    SDL_Quit();
-    return NULL;
 }
 
-void menu()
+int leader_board()
 {
     // window and renderer
     SDL_Window *sdlWindow = SDL_CreateWindow("State.io", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, MENU_SCREEN_WIDTH, MENU_SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
@@ -236,6 +254,70 @@ void menu()
     // mouse coordinates
     double mouse_x, mouse_y;
 
+    // define home button
+    struct button *home = (struct button *)malloc(sizeof(struct button));
+    define_home(home);
+
+    while (1)
+    {
+        SDL_RenderClear(sdlRenderer);
+
+        // show background
+        showimage(sdlRenderer, "..//photo//leaderboard//background.bmp", 0, 0, 1440, 810);
+
+        // show rankings
+        showranking(sdlRenderer);
+
+        // show home button
+        draw_homebutton(sdlRenderer, home);
+
+        // render presentation
+        SDL_RenderPresent(sdlRenderer);
+
+        // events
+        SDL_Event sdlevent;
+        while (SDL_PollEvent(&sdlevent))
+        {
+            switch (sdlevent.type)
+            {
+            case SDL_QUIT:
+                shallExit = SDL_TRUE;
+                SDL_DestroyRenderer(sdlRenderer);
+                SDL_DestroyWindow(sdlWindow);
+                return 0;
+
+            case SDL_MOUSEMOTION:
+                mouse_x = sdlevent.button.x;
+                mouse_y = sdlevent.button.y;
+                zoominghome(mouse_x, mouse_y, home);
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                if (nearhome(home, mouse_x, mouse_y))
+                {
+                    SDL_DestroyRenderer(sdlRenderer);
+                    SDL_DestroyWindow(sdlWindow);
+                    return 1;
+                }
+            }
+        }
+    }
+}
+
+int menu(char *playername)
+{
+    // window and renderer
+    SDL_Window *sdlWindow = SDL_CreateWindow("State.io", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, MENU_SCREEN_WIDTH, MENU_SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+    SDL_Renderer *sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+
+    // when close the window
+    SDL_bool shallExit = SDL_FALSE;
+
+    // mouse coordinates
+    double mouse_x, mouse_y;
+
+    // side of winner of game
+    int winner;
+
     // buttons
     struct button *newgame = (struct button *)malloc(sizeof(struct button));
     struct button *resume = (struct button *)malloc(sizeof(struct button));
@@ -243,14 +325,6 @@ void menu()
     define_newgame(newgame);
     define_resume(resume);
     define_leaderboard(leaderboard);
-
-    // scan player name
-    char *playername = (char *)malloc(sizeof(char) * 200);
-    playername = getname(sdlWindow, sdlRenderer);
-    if (playername == NULL)
-    {
-        return;
-    }
 
     while (shallExit == SDL_FALSE)
     {
@@ -275,7 +349,9 @@ void menu()
             {
             case SDL_QUIT:
                 shallExit = SDL_TRUE;
-                return;
+                SDL_DestroyRenderer(sdlRenderer);
+                SDL_DestroyWindow(sdlWindow);
+                return 1;
                 break;
             case SDL_MOUSEMOTION:
                 mouse_x = sdlevent.button.x;
@@ -287,13 +363,47 @@ void menu()
                 mouse_y = sdlevent.button.y;
                 if (nearnewgame(newgame, mouse_x, mouse_y))
                 {
+                    SDL_DestroyRenderer(sdlRenderer);
                     SDL_DestroyWindow(sdlWindow);
-                    game(1);
-                    return;
+                    winner = game(1);
+                    if (winner == 0)
+                    {
+                        changeleaderboard("neptune", 1);
+                        changeleaderboard(playername, -1);
+                        changeleaderboard("venus", -1);
+                    }
+                    if (winner == 1)
+                    {
+                        changeleaderboard("neptune", -1);
+                        changeleaderboard(playername, 1);
+                        changeleaderboard("venus", -1);
+                    }
+                    if (winner == 2)
+                    {
+                        changeleaderboard("neptune", -1);
+                        changeleaderboard(playername, -1);
+                        changeleaderboard("venus", 1);
+                    }
+                    return 0;
+                }
+                if (nearleaderboard(leaderboard, mouse_x, mouse_y))
+                {
+                    SDL_DestroyRenderer(sdlRenderer);
+                    SDL_DestroyWindow(sdlWindow);
+
+                    int tmp = leader_board();
+                    if (tmp == 1)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
                 }
             }
         }
     }
+    SDL_DestroyRenderer(sdlRenderer);
     SDL_DestroyWindow(sdlWindow);
-    SDL_Quit();
 }
