@@ -1,13 +1,3 @@
-const double MENU_SCREEN_WIDTH = 1440;
-const double MENU_SCREEN_HEIGHT = 810;
-
-struct button
-{
-    double x;
-    double y;
-    int zoom;
-};
-
 // define the buttons
 void define_newgame(struct button *newgame)
 {

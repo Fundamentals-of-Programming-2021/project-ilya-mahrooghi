@@ -8,8 +8,10 @@ CMakeFiles/main.dir/src/main.c.o: ../include/game/mixture.h
 CMakeFiles/main.dir/src/main.c.o: ../include/game/soldiers.h
 CMakeFiles/main.dir/src/main.c.o: ../include/general.h
 CMakeFiles/main.dir/src/main.c.o: ../include/menu/choosemap.h
+CMakeFiles/main.dir/src/main.c.o: ../include/menu/gamesetting.h
 CMakeFiles/main.dir/src/main.c.o: ../include/menu/leaderboard.h
 CMakeFiles/main.dir/src/main.c.o: ../include/menu/menu.h
+CMakeFiles/main.dir/src/main.c.o: ../include/menu/resume.h
 CMakeFiles/main.dir/src/main.c.o: ../src/main.c
 CMakeFiles/main.dir/src/main.c.o: /usr/include/SDL2/SDL.h
 CMakeFiles/main.dir/src/main.c.o: /usr/include/SDL2/SDL_assert.h

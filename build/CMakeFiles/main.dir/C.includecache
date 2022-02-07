@@ -26,9 +26,13 @@ SDL2/SDL_image.h
 
 ../include/menu/choosemap.h
 
+../include/menu/gamesetting.h
+
 ../include/menu/leaderboard.h
 
 ../include/menu/menu.h
+
+../include/menu/resume.h
 
 /home/ilya/Desktop/codes/state.io/src/main.c
 SDL2/SDL.h
@@ -51,6 +55,8 @@ time.h
 -
 math.h
 -
+sys/stat.h
+-
 map.h
 /home/ilya/Desktop/codes/state.io/src/map.h
 soldiers.h
@@ -65,6 +71,10 @@ leaderboard.h
 /home/ilya/Desktop/codes/state.io/src/leaderboard.h
 choosemap.h
 /home/ilya/Desktop/codes/state.io/src/choosemap.h
+gamesetting.h
+/home/ilya/Desktop/codes/state.io/src/gamesetting.h
+resume.h
+/home/ilya/Desktop/codes/state.io/src/resume.h
 AI.h
 /home/ilya/Desktop/codes/state.io/src/AI.h
 general.h

@@ -1,14 +1,14 @@
 void define_random(struct button *random)
 {
-    random->x = 535;
-    random->y = 700;
+    random->x = 533;
+    random->y = 690;
     random->zoom = 0;
 }
 
 void define_start(struct button *start)
 {
     start->x = 575;
-    start->y = 500;
+    start->y = 510;
     start->zoom = 0;
 }
 
@@ -56,15 +56,6 @@ void show_savedmap(SDL_Renderer *renderer, struct button *savedmap)
         double zooming = 10;
         showimage(renderer, "..//photo//selectmap//savedmap.bmp", savedmap->x - zooming, savedmap->y - zooming, 300 + 2 * zooming, 70 + 2 * zooming);
     }
-}
-
-int near_button(struct button *button, double x, double y)
-{
-    if (norm(x - (button->x + 190)) <= 190 && norm(y - (button->y + 45)) <= 45)
-    {
-        return 1;
-    }
-    return 0;
 }
 
 void zoom_resume_start(struct button *random, struct button *start, struct button *savedmap, double mouse_x, double mouse_y)
@@ -163,4 +154,43 @@ void changemapnum(double mouse_x, double mouse_y, int *mapnum)
             (*mapnum) = 3;
         }
     }
+}
+////////////////////////////////
+int checkIfFileExists(const char *filename)
+{
+    struct stat buffer;
+    int exist = stat(filename, &buffer);
+    if (exist == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int is_map_saved(char *playername)
+{
+    char fileaddress[500] = "..//files//map//";
+    strcat(fileaddress, playername);
+    strcat(fileaddress, ".txt");
+    return checkIfFileExists(fileaddress);
+}
+
+void changecolor_tosaved(char *playername, Uint32 color[][5])
+{
+    char fileaddress[500] = "..//files//map//";
+    strcat(fileaddress, playername);
+    strcat(fileaddress, ".txt");
+    FILE *file;
+    file = fopen(fileaddress, "r");
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            fscanf(file, "%x", &color[i][j]);
+        }
+    }
+    fclose(file);
 }

@@ -9,8 +9,10 @@ CMakeFiles/main.dir/src/main.c.o
  ../include/game/soldiers.h
  ../include/general.h
  ../include/menu/choosemap.h
+ ../include/menu/gamesetting.h
  ../include/menu/leaderboard.h
  ../include/menu/menu.h
+ ../include/menu/resume.h
  /home/ilya/Desktop/codes/state.io/src/main.c
  /usr/include/SDL2/SDL.h
  /usr/include/SDL2/SDL_assert.h

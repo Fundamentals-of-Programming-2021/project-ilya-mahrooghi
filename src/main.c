@@ -9,6 +9,7 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
+#include <sys/stat.h>
 
 #include "map.h"
 #include "soldiers.h"
@@ -17,6 +18,8 @@
 #include "menu.h"
 #include "leaderboard.h"
 #include "choosemap.h"
+#include "gamesetting.h"
+#include "resume.h"
 #include "AI.h"
 #include "general.h"
 
@@ -36,7 +39,7 @@ int main()
   // end of program
   int endofprogram = 0;
 
-  //scan player name
+  // scan player name
   char *playername = (char *)malloc(sizeof(char) * 200);
   playername = getname(playername);
   if (playername != NULL)

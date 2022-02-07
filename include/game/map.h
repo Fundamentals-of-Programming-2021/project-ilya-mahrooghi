@@ -13,6 +13,18 @@ Uint32 neutralColor = 0x10b0adab;
 const double SCREEN_WIDTH = 1000;
 const double SCREEN_HEIGHT = 1200;
 
+// screen size of menu
+const double MENU_SCREEN_WIDTH = 1440;
+const double MENU_SCREEN_HEIGHT = 810;
+
+// buttons of menu
+struct button
+{
+    double x;
+    double y;
+    int zoom;
+};
+
 // this is num of poly in a height of map
 int numofpoly = 8;
 
@@ -539,7 +551,7 @@ struct region *findnearestregion(double x, double y, struct region *head, int nu
 {
     for (int i = 0; i < numofregions; i++)
     {
-        if (distance(x, y, (head + i)->x_center, (head + i)->y_center) <= 40)
+        if (distance(x, y, (head + i)->x_center, (head + i)->y_center) <= 50)
         {
             return (head + i);
         }
@@ -565,5 +577,47 @@ void resetpotions()
     for (int i = 0; i < 4; i++)
     {
         more_soldiers[i] = 0;
+    }
+}
+
+// pause button
+int near_button(struct button *button, double x, double y)
+{
+    if (norm(x - (button->x + 190)) <= 190 && norm(y - (button->y + 45)) <= 45)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+void define_pause(struct button *pause)
+{
+    pause->x = 360;
+    pause->y = 30;
+    pause->zoom = 0;
+}
+
+void show_pause(SDL_Renderer *renderer, struct button *pause)
+{
+    if (pause->zoom == 0)
+    {
+        showimage(renderer, "..//photo//game//background//pause.bmp", pause->x, pause->y, 300, 70);
+    }
+    else
+    {
+        double zooming = 10;
+        showimage(renderer, "..//photo//game//background//pause.bmp", pause->x - zooming, pause->y - zooming, 300 + 2 * zooming, 70 + 2 * zooming);
+    }
+}
+
+void zoompause(struct button *pause, double mouse_x, double mouse_y)
+{
+    if (near_button(pause, mouse_x, mouse_y))
+    {
+        pause->zoom = 1;
+    }
+    else
+    {
+        pause->zoom = 0;
     }
 }
