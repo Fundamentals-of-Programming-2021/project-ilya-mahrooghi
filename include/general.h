@@ -1,3 +1,7 @@
+
+
+
+
 int gamesetting(char *playername, Uint32 color[][5], struct region *headregion, int numofregions, int counterof_addsoldier, int counterof_AI)
 {
     double settingwidth = 400;
@@ -308,7 +312,7 @@ char *getname(char *string)
             case SDL_QUIT:
                 SDL_DestroyRenderer(sdlRenderer);
                 SDL_DestroyWindow(sdlWindow);
-                free(sdlWindow);
+                free(string);
                 return NULL;
                 break;
             case SDL_MOUSEBUTTONDOWN:
@@ -432,6 +436,7 @@ int leader_board()
                 shallExit = SDL_TRUE;
                 SDL_DestroyRenderer(sdlRenderer);
                 SDL_DestroyWindow(sdlWindow);
+                free(home);
                 return 0;
 
             case SDL_MOUSEMOTION:
@@ -444,6 +449,7 @@ int leader_board()
                 {
                     SDL_DestroyRenderer(sdlRenderer);
                     SDL_DestroyWindow(sdlWindow);
+                    free(home);
                     return 1;
                 }
             }
@@ -497,6 +503,9 @@ int choose_map(char *playername)
             case SDL_QUIT:
                 SDL_DestroyRenderer(sdlRenderer);
                 SDL_DestroyWindow(sdlWindow);
+                free(random);
+                free(start);
+                free(savedmap);
                 return -1;
                 break;
             case SDL_MOUSEMOTION:
@@ -512,6 +521,9 @@ int choose_map(char *playername)
                 {
                     SDL_DestroyRenderer(sdlRenderer);
                     SDL_DestroyWindow(sdlWindow);
+                    free(random);
+                    free(start);
+                    free(savedmap);
                     int tmp = game(1, color, 1, playername, 0);
                     return tmp;
                 }
@@ -520,6 +532,9 @@ int choose_map(char *playername)
                     gotocolor(mapnum, color);
                     SDL_DestroyRenderer(sdlRenderer);
                     SDL_DestroyWindow(sdlWindow);
+                    free(random);
+                    free(start);
+                    free(savedmap);
                     int tmp = game(1, color, 0, playername, 0);
                     return tmp;
                 }
@@ -529,6 +544,9 @@ int choose_map(char *playername)
                     {
                         SDL_DestroyRenderer(sdlRenderer);
                         SDL_DestroyWindow(sdlWindow);
+                        free(random);
+                        free(start);
+                        free(savedmap);
                         changecolor_tosaved(playername, color);
                         int tmp = game(1, color, 0, playername, 0);
                         return tmp;
@@ -539,6 +557,9 @@ int choose_map(char *playername)
     }
     SDL_DestroyRenderer(sdlRenderer);
     SDL_DestroyWindow(sdlWindow);
+    free(random);
+    free(start);
+    free(savedmap);
 }
 
 int menu(char *playername)
@@ -589,6 +610,9 @@ int menu(char *playername)
                 shallExit = SDL_TRUE;
                 SDL_DestroyRenderer(sdlRenderer);
                 SDL_DestroyWindow(sdlWindow);
+                free(newgame);
+                free(resume);
+                free(leaderboard);
                 return 1;
                 break;
             case SDL_MOUSEMOTION:
@@ -603,6 +627,9 @@ int menu(char *playername)
                 {
                     SDL_DestroyRenderer(sdlRenderer);
                     SDL_DestroyWindow(sdlWindow);
+                    free(newgame);
+                    free(resume);
+                    free(leaderboard);
                     winner = choose_map(playername);
                     if (winner == 0)
                     {
@@ -629,6 +656,9 @@ int menu(char *playername)
                 {
                     SDL_DestroyRenderer(sdlRenderer);
                     SDL_DestroyWindow(sdlWindow);
+                    free(newgame);
+                    free(resume);
+                    free(leaderboard);
 
                     int tmp = leader_board();
                     if (tmp == 1)
@@ -647,6 +677,9 @@ int menu(char *playername)
                     {
                         SDL_DestroyRenderer(sdlRenderer);
                         SDL_DestroyWindow(sdlWindow);
+                        free(newgame);
+                        free(resume);
+                        free(leaderboard);
                         Uint32 color[5][5];
                         winner = game(1, color, 0, playername, 1);
                         if (winner == 0)
@@ -675,4 +708,7 @@ int menu(char *playername)
     }
     SDL_DestroyRenderer(sdlRenderer);
     SDL_DestroyWindow(sdlWindow);
+    free(newgame);
+    free(resume);
+    free(leaderboard);
 }

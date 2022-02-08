@@ -1,6 +1,8 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "sdl_image.h": "c"
+        "sdl_image.h": "c",
+        "general.h": "c",
+        "potion.h": "c"
     }
 }

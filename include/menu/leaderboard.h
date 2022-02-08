@@ -72,10 +72,15 @@ void showranking(SDL_Renderer *renderer)
             // show points
             sprintf(tmpstring, "%d", points[i]);
             text(renderer, 953 - strlen(tmpstring) * 5, 200 + x * i, strlen(tmpstring) * 15, 35, 32, 0, 0, 0, 255, tmpstring);
+            free(tmpstring);
         }
         else
         {
             break;
         }
+    }
+    for (int i = 0; i < 1000; i++)
+    {
+        free(users[i]);
     }
 }
