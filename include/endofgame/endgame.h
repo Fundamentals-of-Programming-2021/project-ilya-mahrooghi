@@ -37,7 +37,7 @@ int numofregions_ofside(int numside, struct region *regions, int numofregions)
     {
         if ((regions + i)->maincolor != backgroundColor && (regions + i)->maincolor != neutralColor)
         {
-            if (((regions + i)->side == numside && (regions + i)->maincolor == color) || is_on_soldiers((regions + i), color))
+            if ((regions + i)->side == numside || is_on_soldiers((regions + i), color))
             {
                 ans++;
             }
@@ -57,11 +57,11 @@ int sideofwinner(struct region *regions, int numofregions)
     {
         return 2;
     }
-    if (numofsides[1] == 0 && numofsides[2] == 0)
+    else if (numofsides[1] == 0 && numofsides[2] == 0)
     {
         return 0;
     }
-    if (numofsides[2] == 0 && numofsides[0] == 0)
+    else if (numofsides[2] == 0 && numofsides[0] == 0)
     {
         return 1;
     }
@@ -88,7 +88,6 @@ void sort(char *users[], int points[], int num)
                 strcpy(strcopy, users[i]);
                 users[i] = users[j];
                 users[j] = strcopy;
-                // free(strcopy);
             }
         }
     }

@@ -106,6 +106,11 @@ void gotocolor(int filenum, Uint32 color[][5])
     {
         file = fopen("..//files//map//color3.txt", "r");
     }
+    if (filenum == 4)
+    {
+        file = fopen("..//files//map//color4.txt", "r");
+    }
+
     for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < 5; j++)
@@ -134,6 +139,10 @@ void showmap(SDL_Renderer *renderer, int mapnum)
     {
         showimage(renderer, "..//photo//selectmap//map3.bmp", 475, 10, 490, 490);
     }
+    if (mapnum == 4)
+    {
+        showimage(renderer, "..//photo//selectmap//map4.bmp", 475, 10, 490, 490);
+    }
 }
 
 void changemapnum(double mouse_x, double mouse_y, int *mapnum)
@@ -141,7 +150,7 @@ void changemapnum(double mouse_x, double mouse_y, int *mapnum)
     if (norm(mouse_x - (1003.5 + 26.5)) <= 26.5 && norm(mouse_y - (168 + 45)) <= 45)
     {
         (*mapnum)++;
-        if ((*mapnum) == 4)
+        if ((*mapnum) == 5)
         {
             (*mapnum) = 0;
         }
@@ -151,7 +160,7 @@ void changemapnum(double mouse_x, double mouse_y, int *mapnum)
         (*mapnum)--;
         if ((*mapnum) == -1)
         {
-            (*mapnum) = 3;
+            (*mapnum) = 4;
         }
     }
 }

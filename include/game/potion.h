@@ -39,14 +39,14 @@ void define_mixtures(struct speedbooster *head_speedbooster, struct freeze *head
     }
 }
 
-// show the mixtures
+// show the potions
 void draw_speedbooster(SDL_Renderer *renderer, struct speedbooster *speedbooster)
 {
     if (speedbooster->is_on == 1)
     {
         double x_center = speedbooster->x;
         double y_center = speedbooster->y;
-        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//poison//speedbooster.bmp", x_center, y_center, 50, 50);
+        showimage(renderer, "..//photo//game//potion//speedbooster.bmp", x_center, y_center, 50, 50);
     }
 }
 
@@ -56,7 +56,7 @@ void draw_freeze(SDL_Renderer *renderer, struct freeze *freeze)
     {
         double x_center = freeze->x;
         double y_center = freeze->y;
-        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//poison//freeze.bmp", x_center, y_center, 50, 50);
+        showimage(renderer, "..//photo//game//potion//freeze.bmp", x_center, y_center, 50, 50);
     }
 }
 
@@ -66,7 +66,7 @@ void draw_inf_soldiers(SDL_Renderer *renderer, struct inf_soldiers *inf_soldiers
     {
         double x_center = inf_soldiers->x;
         double y_center = inf_soldiers->y;
-        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//poison//inf_soldiers.bmp", x_center, y_center, 50, 50);
+        showimage(renderer, "..//photo//game//potion//inf_soldiers.bmp", x_center, y_center, 50, 50);
     }
 }
 
@@ -76,7 +76,7 @@ void draw_more_soldiers(SDL_Renderer *renderer, struct more_soldiers *more_soldi
     {
         double x_center = more_soldiers->x;
         double y_center = more_soldiers->y;
-        showimage(renderer, "//home//ilya//Desktop//codes//state.io//photo//game//poison//more_soldiers.bmp", x_center, y_center, 90, 90);
+        showimage(renderer, "..//photo//game//potion//more_soldiers.bmp", x_center, y_center, 90, 90);
     }
 }
 

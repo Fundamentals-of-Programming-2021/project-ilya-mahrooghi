@@ -51,18 +51,6 @@ void change_data(char *playername, struct region *head, int *numofregion, int *c
         // colors
         fscanf(file, "%x %x", &((head + i)->maincolor), &((head + i)->nowcolor));
 
-        // toattacking
-        long int tmp;
-        fscanf(file, "%ld", &tmp);
-        if (tmp == -1)
-        {
-            (head + i)->toattacking = NULL;
-        }
-        else
-        {
-            (head + i)->toattacking = (head + tmp);
-        }
-
         // side
         fscanf(file, "%d", &((head + i)->side));
 
@@ -86,6 +74,7 @@ void change_data(char *playername, struct region *head, int *numofregion, int *c
                 fscanf(file, "%lf %lf ", &((head + i)->soldiers[k][j].current_vx), &((head + i)->soldiers[k][j].current_vy));
 
                 // to
+                long int tmp;
                 fscanf(file, "%ld", &tmp);
                 if (tmp == -1)
                 {

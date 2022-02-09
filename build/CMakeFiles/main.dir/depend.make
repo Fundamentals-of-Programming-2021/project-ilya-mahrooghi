@@ -4,7 +4,7 @@
 CMakeFiles/main.dir/src/main.c.o: ../include/AI/AI.h
 CMakeFiles/main.dir/src/main.c.o: ../include/endofgame/endgame.h
 CMakeFiles/main.dir/src/main.c.o: ../include/game/map.h
-CMakeFiles/main.dir/src/main.c.o: ../include/game/mixture.h
+CMakeFiles/main.dir/src/main.c.o: ../include/game/potion.h
 CMakeFiles/main.dir/src/main.c.o: ../include/game/soldiers.h
 CMakeFiles/main.dir/src/main.c.o: ../include/general.h
 CMakeFiles/main.dir/src/main.c.o: ../include/menu/choosemap.h

@@ -113,16 +113,6 @@ void save_game(char *playername, struct region *head, int numofregion, int count
         // colors
         fprintf(file, "%x %x\n", (head + i)->maincolor, (head + i)->nowcolor);
 
-        // toattacking
-        if ((head + i)->toattacking != NULL)
-        {
-            fprintf(file, "%ld\n", (head + i)->toattacking - head);
-        }
-        else
-        {
-            fprintf(file, "-1\n");
-        }
-
         // side
         fprintf(file, "%d\n", (head + i)->side);
 

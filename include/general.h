@@ -1,7 +1,3 @@
-
-
-
-
 int gamesetting(char *playername, Uint32 color[][5], struct region *headregion, int numofregions, int counterof_addsoldier, int counterof_AI)
 {
     double settingwidth = 400;
@@ -41,8 +37,8 @@ int gamesetting(char *playername, Uint32 color[][5], struct region *headregion, 
                 {
                     SDL_DestroyRenderer(settingRenderer);
                     SDL_DestroyWindow(settingWindow);
-                    settingWindow = NULL;
-                    settingRenderer = NULL;
+                    free(savemap);
+                    free(savegame);
                     return -1;
                 }
                 break;
@@ -95,13 +91,15 @@ int game(int sidenum, Uint32 color[5][5], int randomflag, char *playername, int 
     int pauseflag = 1;
 
     // define regions
-    struct region *headregion = (struct region *)malloc(sizeof(struct region) * 100);
+    struct region *headregion = (struct region *)malloc(sizeof(struct region) * 30);
     int numofregions;
     headregion = polygonwindow(sdlRenderer, &numofregions, color, randomflag);
 
     // attacking of soldiers and work with mouse
     struct region *attackfrom = (struct region *)malloc(sizeof(struct region));
     struct region *attackto = (struct region *)malloc(sizeof(struct region));
+    attackfrom = NULL;
+    attackto = NULL;
     double mouse_x, mouse_y;
 
     // mixtures
@@ -151,10 +149,10 @@ int game(int sidenum, Uint32 color[5][5], int randomflag, char *playername, int 
             all_of_mixtures(sdlRenderer, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers, headregion, numofregions);
 
             // AI
-            if (counterof_AI == 20)
+            // if (counterof_AI == 20)
             {
                 counterof_AI = 0;
-                playbots(sidenum, headregion, numofregions);
+                playbots(sidenum, headregion, numofregions, head_speedbooster, head_freeze, head_inf_soldiers, head_more_soldiers);
             }
 
             // add counters
@@ -192,8 +190,17 @@ int game(int sidenum, Uint32 color[5][5], int randomflag, char *playername, int 
                 SDL_RenderPresent(sdlRenderer);
                 resetpotions();
                 SDL_Delay(300);
+
                 SDL_DestroyRenderer(sdlRenderer);
                 SDL_DestroyWindow(sdlWindow);
+                ////////////////////////////////////////////////////////////////
+                free(pause);
+                free(head_speedbooster);
+                free(head_inf_soldiers);
+                free(head_freeze);
+                free(head_more_soldiers);
+                free(headregion);
+                ////////////////////////////////////////////////////////////////
                 return tmp;
             }
         }
@@ -211,6 +218,14 @@ int game(int sidenum, Uint32 color[5][5], int randomflag, char *playername, int 
                 resetpotions();
                 SDL_DestroyRenderer(sdlRenderer);
                 SDL_DestroyWindow(sdlWindow);
+                ////////////////////////////////////////////////////////////////
+                free(pause);
+                free(head_speedbooster);
+                free(head_inf_soldiers);
+                free(head_freeze);
+                free(head_more_soldiers);
+                free(headregion);
+                ////////////////////////////////////////////////////////////////
                 return -1;
                 break;
             case SDL_MOUSEBUTTONDOWN:
@@ -656,6 +671,7 @@ int menu(char *playername)
                 {
                     SDL_DestroyRenderer(sdlRenderer);
                     SDL_DestroyWindow(sdlWindow);
+                    
                     free(newgame);
                     free(resume);
                     free(leaderboard);

@@ -1,3 +1,3 @@
-neptune 18
-venus 3
-ilya -16
+venus 4
+ilya -2
+neptune -2

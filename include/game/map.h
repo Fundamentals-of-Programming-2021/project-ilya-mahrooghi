@@ -56,7 +56,6 @@ struct region
     int numofsoldiers;
     Uint32 maincolor, nowcolor;
     struct soldier soldiers[4][200];
-    struct region *toattacking;
     int side;
 };
 
@@ -263,7 +262,7 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
 
     if (speedboosterflag)
     {
-        showimage(renderer, "..//photo//game//poison//fire.bmp", center.x - 47, center.y - 39, 100, 100);
+        showimage(renderer, "..//photo//game//potion//fire.bmp", center.x - 47, center.y - 39, 100, 100);
     }
 
     if (maincolor == neutralColor)
@@ -282,6 +281,8 @@ void drawpolygonregion(SDL_Renderer *renderer, struct point center, double radiu
     {
         showimage(renderer, "..//photo//game//background//venus.bmp", center.x - 34, center.y - 26, 76, 76);
     }
+    free(xarray);
+    free(yarray);
 }
 
 // define the array of regions
@@ -392,7 +393,6 @@ struct region *polygonwindow(SDL_Renderer *renderer, int *num, Uint32 color[5][5
     *num = count;
     for (int i = 0; i < count; i++)
     {
-        (head + i)->toattacking = NULL;
         for (int j = 0; j < 200; j++)
         {
             for (int k = 0; k < 4; k++)
@@ -517,22 +517,22 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             int tmpside = (head + i)->side;
             if ((head + i)->maincolor != neutralColor && freeze[tmpside] > 0)
             {
-                showimage(renderer, "..//photo//game//poison//freezed.bmp", center.x - 40, center.y - 36, 90, 90);
+                showimage(renderer, "..//photo//game//potion//freezed.bmp", center.x - 40, center.y - 36, 90, 90);
             }
             if ((head + i)->maincolor != neutralColor && speedbooster[tmpside] > 0)
             {
-                // showimage(renderer, "..//photo//game//poison//fire.bmp", center.x - 47, center.y - 37, 100, 100);
+                // showimage(renderer, "..//photo//game//potion//fire.bmp", center.x - 47, center.y - 37, 100, 100);
                 drawpolygonregion(renderer, center, radius, nowcolor, maincolor, 1);
             }
             if ((head + i)->maincolor != neutralColor && inf_soldiers[tmpside] > 0)
             {
                 // drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
-                showimage(renderer, "..//photo//game//poison//waves.bmp", center.x - 47, center.y - 37, 100, 100);
+                showimage(renderer, "..//photo//game//potion//waves.bmp", center.x - 47, center.y - 37, 100, 100);
             }
             if ((head + i)->maincolor != neutralColor && more_soldiers[tmpside] > 0)
             {
                 // drawpolygonregion(renderer, center, radius, nowcolor, maincolor);
-                showimage(renderer, "..//photo//game//poison//more.bmp", center.x - 47, center.y - 40, 100, 100);
+                showimage(renderer, "..//photo//game//potion//more.bmp", center.x - 47, center.y - 40, 100, 100);
             }
 
             int numofsoldiers = (head + i)->numofsoldiers;
@@ -540,8 +540,9 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             sprintf(string, " %d ", numofsoldiers);
             const char *str2 = string;
             text(renderer, (head + i)->x_center - 15, (head + i)->y_center + 52, 40, 30, 32, 0, 0, 0, 255, str2);
-            // sprintf(string, " %d ", (head + i)->side);
-            // text(renderer, (head + i)->x_center - 15, (head + i)->y_center - 60, 40, 30, 32, 0, 0, 0, 255, str2);
+            sprintf(string, " %d ", (head + i)->side);
+            text(renderer, (head + i)->x_center - 15, (head + i)->y_center - 60, 40, 30, 32, 0, 0, 0, 255, str2);
+            free(string);
         }
     }
 }
@@ -551,15 +552,18 @@ struct region *findnearestregion(double x, double y, struct region *head, int nu
 {
     for (int i = 0; i < numofregions; i++)
     {
-        if (distance(x, y, (head + i)->x_center, (head + i)->y_center) <= 50)
+        if (distance(x, y, (head + i)->x_center, (head + i)->y_center) <= 70)
         {
-            return (head + i);
+            if ((head + i)->maincolor != backgroundColor)
+            {
+                return (head + i);
+            }
         }
     }
     return NULL;
 }
 
-// reset the poisons
+// reset the potions
 void resetpotions()
 {
     for (int i = 0; i < 4; i++)

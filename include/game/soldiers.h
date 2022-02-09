@@ -239,7 +239,6 @@ void attacking(SDL_Renderer *renderer, struct region *head, int numofregion)
                         {
                             (head + i)->soldiers[k][j].to->maincolor = (head + i)->soldiers[k][j].color;
                             (head + i)->soldiers[k][j].to->side = (head + i)->side;
-                            (head + i)->soldiers[k][j].to->toattacking = NULL;
                         }
 
                         // check the target region is enemy or not and then change the numofsoldiers

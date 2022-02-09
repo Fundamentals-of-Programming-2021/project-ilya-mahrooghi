@@ -18,7 +18,7 @@ SDL2/SDL2_gfxPrimitives.h
 SDL2/SDL_image.h
 -
 
-../include/game/mixture.h
+../include/game/potion.h
 
 ../include/game/soldiers.h
 
@@ -61,8 +61,8 @@ map.h
 /home/ilya/Desktop/codes/state.io/src/map.h
 soldiers.h
 /home/ilya/Desktop/codes/state.io/src/soldiers.h
-mixture.h
-/home/ilya/Desktop/codes/state.io/src/mixture.h
+potion.h
+/home/ilya/Desktop/codes/state.io/src/potion.h
 endgame.h
 /home/ilya/Desktop/codes/state.io/src/endgame.h
 menu.h
