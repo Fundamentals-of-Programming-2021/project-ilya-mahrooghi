@@ -540,8 +540,6 @@ void printregions(SDL_Renderer *renderer, int numofregions, struct region *head)
             sprintf(string, " %d ", numofsoldiers);
             const char *str2 = string;
             text(renderer, (head + i)->x_center - 15, (head + i)->y_center + 52, 40, 30, 32, 0, 0, 0, 255, str2);
-            sprintf(string, " %d ", (head + i)->side);
-            text(renderer, (head + i)->x_center - 15, (head + i)->y_center - 60, 40, 30, 32, 0, 0, 0, 255, str2);
             free(string);
         }
     }
