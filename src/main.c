@@ -11,6 +11,30 @@
 #include <math.h>
 #include <sys/stat.h>
 
+// colors
+Uint32 color1 = 0x209b2d71;
+Uint32 color2 = 0x20926c43;
+Uint32 color3 = 0x203543c0;
+Uint32 backgroundColor = 0xff7f00ff;
+Uint32 neutralColor = 0x10b0adab;
+
+// screen size
+const double SCREEN_WIDTH = 1000;
+const double SCREEN_HEIGHT = 1200;
+
+// screen size of menu
+const double MENU_SCREEN_WIDTH = 1440;
+const double MENU_SCREEN_HEIGHT = 810;
+
+// this is num of poly in a height of map
+int numofpoly = 8;
+
+// array of mixture
+int speedbooster[3] = {0};
+int freeze[3] = {0};
+int inf_soldiers[3] = {0};
+int more_soldiers[3] = {0};
+
 #include "map.h"
 #include "soldiers.h"
 #include "potion.h"
@@ -50,7 +74,7 @@ int main()
     }
   }
   free(playername);
-  
+
   SDL_Quit();
   TTF_Quit();
   return 0;
