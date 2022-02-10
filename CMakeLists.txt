@@ -8,5 +8,7 @@ include_directories("include/AI")
 include_directories("include/endofgame")
 include_directories("include")
 
-add_executable(main src/main.c)
+file(GLOB_RECURSE SOURCE "src/*.c" )
+add_executable(main "${SOURCE}")
+
 target_link_libraries(main m SDL2 SDL2_gfx SDL2_ttf)

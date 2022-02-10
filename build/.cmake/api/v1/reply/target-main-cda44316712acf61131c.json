@@ -25,7 +25,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 11,
+				"line" : 12,
 				"parent" : 0
 			},
 			{
@@ -83,29 +83,40 @@
 				},
 				{
 					"backtrace" : 3,
-					"path" : "/home/ilya/Desktop/codes/state.io/include/game"
+					"path" : "/home/ilya/Desktop/codes/project-ilya-mahrooghi/include/game"
 				},
 				{
 					"backtrace" : 4,
-					"path" : "/home/ilya/Desktop/codes/state.io/include/menu"
+					"path" : "/home/ilya/Desktop/codes/project-ilya-mahrooghi/include/menu"
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/home/ilya/Desktop/codes/state.io/include/AI"
+					"path" : "/home/ilya/Desktop/codes/project-ilya-mahrooghi/include/AI"
 				},
 				{
 					"backtrace" : 6,
-					"path" : "/home/ilya/Desktop/codes/state.io/include/endofgame"
+					"path" : "/home/ilya/Desktop/codes/project-ilya-mahrooghi/include/endofgame"
 				},
 				{
 					"backtrace" : 7,
-					"path" : "/home/ilya/Desktop/codes/state.io/include"
+					"path" : "/home/ilya/Desktop/codes/project-ilya-mahrooghi/include"
 				}
 			],
 			"language" : "C",
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11
 			]
 		}
 	],
@@ -150,7 +161,18 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11
 			]
 		}
 	],
@@ -159,7 +181,73 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/AI.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/choosemap.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/endgame.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/gamesetting.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/general.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/leaderboard.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/main.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/map.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/menu.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/potion.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/resume.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/soldiers.c",
 			"sourceGroupIndex" : 0
 		}
 	],

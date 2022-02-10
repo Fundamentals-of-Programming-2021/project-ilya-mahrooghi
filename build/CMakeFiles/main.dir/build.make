@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ilya/Desktop/codes/state.io
+CMAKE_SOURCE_DIR = /home/ilya/Desktop/codes/project-ilya-mahrooghi
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ilya/Desktop/codes/state.io/build
+CMAKE_BINARY_DIR = /home/ilya/Desktop/codes/project-ilya-mahrooghi/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/main.dir/depend.make
@@ -57,30 +57,195 @@ include CMakeFiles/main.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/main.dir/flags.make
 
+CMakeFiles/main.dir/src/AI.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/AI.c.o: ../src/AI.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/main.dir/src/AI.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/AI.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/AI.c
+
+CMakeFiles/main.dir/src/AI.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/AI.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/AI.c > CMakeFiles/main.dir/src/AI.c.i
+
+CMakeFiles/main.dir/src/AI.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/AI.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/AI.c -o CMakeFiles/main.dir/src/AI.c.s
+
+CMakeFiles/main.dir/src/choosemap.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/choosemap.c.o: ../src/choosemap.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/main.dir/src/choosemap.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/choosemap.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/choosemap.c
+
+CMakeFiles/main.dir/src/choosemap.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/choosemap.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/choosemap.c > CMakeFiles/main.dir/src/choosemap.c.i
+
+CMakeFiles/main.dir/src/choosemap.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/choosemap.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/choosemap.c -o CMakeFiles/main.dir/src/choosemap.c.s
+
+CMakeFiles/main.dir/src/endgame.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/endgame.c.o: ../src/endgame.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/main.dir/src/endgame.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/endgame.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/endgame.c
+
+CMakeFiles/main.dir/src/endgame.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/endgame.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/endgame.c > CMakeFiles/main.dir/src/endgame.c.i
+
+CMakeFiles/main.dir/src/endgame.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/endgame.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/endgame.c -o CMakeFiles/main.dir/src/endgame.c.s
+
+CMakeFiles/main.dir/src/gamesetting.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/gamesetting.c.o: ../src/gamesetting.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/main.dir/src/gamesetting.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/gamesetting.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/gamesetting.c
+
+CMakeFiles/main.dir/src/gamesetting.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/gamesetting.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/gamesetting.c > CMakeFiles/main.dir/src/gamesetting.c.i
+
+CMakeFiles/main.dir/src/gamesetting.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/gamesetting.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/gamesetting.c -o CMakeFiles/main.dir/src/gamesetting.c.s
+
+CMakeFiles/main.dir/src/general.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/general.c.o: ../src/general.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/main.dir/src/general.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/general.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/general.c
+
+CMakeFiles/main.dir/src/general.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/general.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/general.c > CMakeFiles/main.dir/src/general.c.i
+
+CMakeFiles/main.dir/src/general.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/general.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/general.c -o CMakeFiles/main.dir/src/general.c.s
+
+CMakeFiles/main.dir/src/leaderboard.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/leaderboard.c.o: ../src/leaderboard.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/main.dir/src/leaderboard.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/leaderboard.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/leaderboard.c
+
+CMakeFiles/main.dir/src/leaderboard.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/leaderboard.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/leaderboard.c > CMakeFiles/main.dir/src/leaderboard.c.i
+
+CMakeFiles/main.dir/src/leaderboard.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/leaderboard.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/leaderboard.c -o CMakeFiles/main.dir/src/leaderboard.c.s
+
 CMakeFiles/main.dir/src/main.c.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/main.c.o: ../src/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/state.io/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/main.dir/src/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/main.c.o   -c /home/ilya/Desktop/codes/state.io/src/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/main.dir/src/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/main.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/main.c
 
 CMakeFiles/main.dir/src/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/state.io/src/main.c > CMakeFiles/main.dir/src/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/main.c > CMakeFiles/main.dir/src/main.c.i
 
 CMakeFiles/main.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/state.io/src/main.c -o CMakeFiles/main.dir/src/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/main.c -o CMakeFiles/main.dir/src/main.c.s
+
+CMakeFiles/main.dir/src/map.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/map.c.o: ../src/map.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/main.dir/src/map.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/map.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/map.c
+
+CMakeFiles/main.dir/src/map.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/map.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/map.c > CMakeFiles/main.dir/src/map.c.i
+
+CMakeFiles/main.dir/src/map.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/map.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/map.c -o CMakeFiles/main.dir/src/map.c.s
+
+CMakeFiles/main.dir/src/menu.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/menu.c.o: ../src/menu.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/main.dir/src/menu.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/menu.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/menu.c
+
+CMakeFiles/main.dir/src/menu.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/menu.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/menu.c > CMakeFiles/main.dir/src/menu.c.i
+
+CMakeFiles/main.dir/src/menu.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/menu.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/menu.c -o CMakeFiles/main.dir/src/menu.c.s
+
+CMakeFiles/main.dir/src/potion.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/potion.c.o: ../src/potion.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/main.dir/src/potion.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/potion.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/potion.c
+
+CMakeFiles/main.dir/src/potion.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/potion.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/potion.c > CMakeFiles/main.dir/src/potion.c.i
+
+CMakeFiles/main.dir/src/potion.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/potion.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/potion.c -o CMakeFiles/main.dir/src/potion.c.s
+
+CMakeFiles/main.dir/src/resume.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/resume.c.o: ../src/resume.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/main.dir/src/resume.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/resume.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/resume.c
+
+CMakeFiles/main.dir/src/resume.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/resume.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/resume.c > CMakeFiles/main.dir/src/resume.c.i
+
+CMakeFiles/main.dir/src/resume.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/resume.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/resume.c -o CMakeFiles/main.dir/src/resume.c.s
+
+CMakeFiles/main.dir/src/soldiers.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/soldiers.c.o: ../src/soldiers.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/main.dir/src/soldiers.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/main.dir/src/soldiers.c.o   -c /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/soldiers.c
+
+CMakeFiles/main.dir/src/soldiers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/main.dir/src/soldiers.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/soldiers.c > CMakeFiles/main.dir/src/soldiers.c.i
+
+CMakeFiles/main.dir/src/soldiers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/main.dir/src/soldiers.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ilya/Desktop/codes/project-ilya-mahrooghi/src/soldiers.c -o CMakeFiles/main.dir/src/soldiers.c.s
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/src/main.c.o"
+"CMakeFiles/main.dir/src/AI.c.o" \
+"CMakeFiles/main.dir/src/choosemap.c.o" \
+"CMakeFiles/main.dir/src/endgame.c.o" \
+"CMakeFiles/main.dir/src/gamesetting.c.o" \
+"CMakeFiles/main.dir/src/general.c.o" \
+"CMakeFiles/main.dir/src/leaderboard.c.o" \
+"CMakeFiles/main.dir/src/main.c.o" \
+"CMakeFiles/main.dir/src/map.c.o" \
+"CMakeFiles/main.dir/src/menu.c.o" \
+"CMakeFiles/main.dir/src/potion.c.o" \
+"CMakeFiles/main.dir/src/resume.c.o" \
+"CMakeFiles/main.dir/src/soldiers.c.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
+main: CMakeFiles/main.dir/src/AI.c.o
+main: CMakeFiles/main.dir/src/choosemap.c.o
+main: CMakeFiles/main.dir/src/endgame.c.o
+main: CMakeFiles/main.dir/src/gamesetting.c.o
+main: CMakeFiles/main.dir/src/general.c.o
+main: CMakeFiles/main.dir/src/leaderboard.c.o
 main: CMakeFiles/main.dir/src/main.c.o
+main: CMakeFiles/main.dir/src/map.c.o
+main: CMakeFiles/main.dir/src/menu.c.o
+main: CMakeFiles/main.dir/src/potion.c.o
+main: CMakeFiles/main.dir/src/resume.c.o
+main: CMakeFiles/main.dir/src/soldiers.c.o
 main: CMakeFiles/main.dir/build.make
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilya/Desktop/codes/state.io/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking C executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -93,6 +258,6 @@ CMakeFiles/main.dir/clean:
 .PHONY : CMakeFiles/main.dir/clean
 
 CMakeFiles/main.dir/depend:
-	cd /home/ilya/Desktop/codes/state.io/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ilya/Desktop/codes/state.io /home/ilya/Desktop/codes/state.io /home/ilya/Desktop/codes/state.io/build /home/ilya/Desktop/codes/state.io/build /home/ilya/Desktop/codes/state.io/build/CMakeFiles/main.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ilya/Desktop/codes/project-ilya-mahrooghi/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ilya/Desktop/codes/project-ilya-mahrooghi /home/ilya/Desktop/codes/project-ilya-mahrooghi /home/ilya/Desktop/codes/project-ilya-mahrooghi/build /home/ilya/Desktop/codes/project-ilya-mahrooghi/build /home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles/main.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/main.dir/depend
 

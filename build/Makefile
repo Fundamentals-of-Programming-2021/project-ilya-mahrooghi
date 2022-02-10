@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ilya/Desktop/codes/state.io
+CMAKE_SOURCE_DIR = /home/ilya/Desktop/codes/project-ilya-mahrooghi
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ilya/Desktop/codes/state.io/build
+CMAKE_BINARY_DIR = /home/ilya/Desktop/codes/project-ilya-mahrooghi/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ilya/Desktop/codes/state.io/build/CMakeFiles /home/ilya/Desktop/codes/state.io/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles /home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ilya/Desktop/codes/state.io/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ilya/Desktop/codes/project-ilya-mahrooghi/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,168 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/AI.o: src/AI.c.o
+
+.PHONY : src/AI.o
+
+# target to build an object file
+src/AI.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AI.c.o
+.PHONY : src/AI.c.o
+
+src/AI.i: src/AI.c.i
+
+.PHONY : src/AI.i
+
+# target to preprocess a source file
+src/AI.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AI.c.i
+.PHONY : src/AI.c.i
+
+src/AI.s: src/AI.c.s
+
+.PHONY : src/AI.s
+
+# target to generate assembly for a file
+src/AI.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AI.c.s
+.PHONY : src/AI.c.s
+
+src/choosemap.o: src/choosemap.c.o
+
+.PHONY : src/choosemap.o
+
+# target to build an object file
+src/choosemap.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/choosemap.c.o
+.PHONY : src/choosemap.c.o
+
+src/choosemap.i: src/choosemap.c.i
+
+.PHONY : src/choosemap.i
+
+# target to preprocess a source file
+src/choosemap.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/choosemap.c.i
+.PHONY : src/choosemap.c.i
+
+src/choosemap.s: src/choosemap.c.s
+
+.PHONY : src/choosemap.s
+
+# target to generate assembly for a file
+src/choosemap.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/choosemap.c.s
+.PHONY : src/choosemap.c.s
+
+src/endgame.o: src/endgame.c.o
+
+.PHONY : src/endgame.o
+
+# target to build an object file
+src/endgame.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/endgame.c.o
+.PHONY : src/endgame.c.o
+
+src/endgame.i: src/endgame.c.i
+
+.PHONY : src/endgame.i
+
+# target to preprocess a source file
+src/endgame.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/endgame.c.i
+.PHONY : src/endgame.c.i
+
+src/endgame.s: src/endgame.c.s
+
+.PHONY : src/endgame.s
+
+# target to generate assembly for a file
+src/endgame.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/endgame.c.s
+.PHONY : src/endgame.c.s
+
+src/gamesetting.o: src/gamesetting.c.o
+
+.PHONY : src/gamesetting.o
+
+# target to build an object file
+src/gamesetting.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/gamesetting.c.o
+.PHONY : src/gamesetting.c.o
+
+src/gamesetting.i: src/gamesetting.c.i
+
+.PHONY : src/gamesetting.i
+
+# target to preprocess a source file
+src/gamesetting.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/gamesetting.c.i
+.PHONY : src/gamesetting.c.i
+
+src/gamesetting.s: src/gamesetting.c.s
+
+.PHONY : src/gamesetting.s
+
+# target to generate assembly for a file
+src/gamesetting.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/gamesetting.c.s
+.PHONY : src/gamesetting.c.s
+
+src/general.o: src/general.c.o
+
+.PHONY : src/general.o
+
+# target to build an object file
+src/general.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/general.c.o
+.PHONY : src/general.c.o
+
+src/general.i: src/general.c.i
+
+.PHONY : src/general.i
+
+# target to preprocess a source file
+src/general.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/general.c.i
+.PHONY : src/general.c.i
+
+src/general.s: src/general.c.s
+
+.PHONY : src/general.s
+
+# target to generate assembly for a file
+src/general.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/general.c.s
+.PHONY : src/general.c.s
+
+src/leaderboard.o: src/leaderboard.c.o
+
+.PHONY : src/leaderboard.o
+
+# target to build an object file
+src/leaderboard.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/leaderboard.c.o
+.PHONY : src/leaderboard.c.o
+
+src/leaderboard.i: src/leaderboard.c.i
+
+.PHONY : src/leaderboard.i
+
+# target to preprocess a source file
+src/leaderboard.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/leaderboard.c.i
+.PHONY : src/leaderboard.c.i
+
+src/leaderboard.s: src/leaderboard.c.s
+
+.PHONY : src/leaderboard.s
+
+# target to generate assembly for a file
+src/leaderboard.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/leaderboard.c.s
+.PHONY : src/leaderboard.c.s
+
 src/main.o: src/main.c.o
 
 .PHONY : src/main.o
@@ -150,6 +312,141 @@ src/main.c.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/map.o: src/map.c.o
+
+.PHONY : src/map.o
+
+# target to build an object file
+src/map.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/map.c.o
+.PHONY : src/map.c.o
+
+src/map.i: src/map.c.i
+
+.PHONY : src/map.i
+
+# target to preprocess a source file
+src/map.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/map.c.i
+.PHONY : src/map.c.i
+
+src/map.s: src/map.c.s
+
+.PHONY : src/map.s
+
+# target to generate assembly for a file
+src/map.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/map.c.s
+.PHONY : src/map.c.s
+
+src/menu.o: src/menu.c.o
+
+.PHONY : src/menu.o
+
+# target to build an object file
+src/menu.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/menu.c.o
+.PHONY : src/menu.c.o
+
+src/menu.i: src/menu.c.i
+
+.PHONY : src/menu.i
+
+# target to preprocess a source file
+src/menu.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/menu.c.i
+.PHONY : src/menu.c.i
+
+src/menu.s: src/menu.c.s
+
+.PHONY : src/menu.s
+
+# target to generate assembly for a file
+src/menu.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/menu.c.s
+.PHONY : src/menu.c.s
+
+src/potion.o: src/potion.c.o
+
+.PHONY : src/potion.o
+
+# target to build an object file
+src/potion.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/potion.c.o
+.PHONY : src/potion.c.o
+
+src/potion.i: src/potion.c.i
+
+.PHONY : src/potion.i
+
+# target to preprocess a source file
+src/potion.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/potion.c.i
+.PHONY : src/potion.c.i
+
+src/potion.s: src/potion.c.s
+
+.PHONY : src/potion.s
+
+# target to generate assembly for a file
+src/potion.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/potion.c.s
+.PHONY : src/potion.c.s
+
+src/resume.o: src/resume.c.o
+
+.PHONY : src/resume.o
+
+# target to build an object file
+src/resume.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/resume.c.o
+.PHONY : src/resume.c.o
+
+src/resume.i: src/resume.c.i
+
+.PHONY : src/resume.i
+
+# target to preprocess a source file
+src/resume.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/resume.c.i
+.PHONY : src/resume.c.i
+
+src/resume.s: src/resume.c.s
+
+.PHONY : src/resume.s
+
+# target to generate assembly for a file
+src/resume.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/resume.c.s
+.PHONY : src/resume.c.s
+
+src/soldiers.o: src/soldiers.c.o
+
+.PHONY : src/soldiers.o
+
+# target to build an object file
+src/soldiers.c.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/soldiers.c.o
+.PHONY : src/soldiers.c.o
+
+src/soldiers.i: src/soldiers.c.i
+
+.PHONY : src/soldiers.i
+
+# target to preprocess a source file
+src/soldiers.c.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/soldiers.c.i
+.PHONY : src/soldiers.c.i
+
+src/soldiers.s: src/soldiers.c.s
+
+.PHONY : src/soldiers.s
+
+# target to generate assembly for a file
+src/soldiers.c.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/soldiers.c.s
+.PHONY : src/soldiers.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +456,42 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
+	@echo "... src/AI.o"
+	@echo "... src/AI.i"
+	@echo "... src/AI.s"
+	@echo "... src/choosemap.o"
+	@echo "... src/choosemap.i"
+	@echo "... src/choosemap.s"
+	@echo "... src/endgame.o"
+	@echo "... src/endgame.i"
+	@echo "... src/endgame.s"
+	@echo "... src/gamesetting.o"
+	@echo "... src/gamesetting.i"
+	@echo "... src/gamesetting.s"
+	@echo "... src/general.o"
+	@echo "... src/general.i"
+	@echo "... src/general.s"
+	@echo "... src/leaderboard.o"
+	@echo "... src/leaderboard.i"
+	@echo "... src/leaderboard.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/map.o"
+	@echo "... src/map.i"
+	@echo "... src/map.s"
+	@echo "... src/menu.o"
+	@echo "... src/menu.i"
+	@echo "... src/menu.s"
+	@echo "... src/potion.o"
+	@echo "... src/potion.i"
+	@echo "... src/potion.s"
+	@echo "... src/resume.o"
+	@echo "... src/resume.i"
+	@echo "... src/resume.s"
+	@echo "... src/soldiers.o"
+	@echo "... src/soldiers.i"
+	@echo "... src/soldiers.s"
 .PHONY : help
 
 
