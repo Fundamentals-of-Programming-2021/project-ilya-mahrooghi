@@ -257,7 +257,7 @@ int game(int sidenum, Uint32 color[5][5], int randomflag, char *playername, int 
 
                     if (attackto != NULL && attackfrom != NULL && attackto != attackfrom)
                     {
-                        // if (attackfrom->side == sidenum)
+                        if (attackfrom->side == sidenum)
                         {
                             start_of_attack(attackfrom, attackto);
                         }
