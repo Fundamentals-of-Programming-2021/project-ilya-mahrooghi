@@ -1,5 +1,2 @@
 # project-ilya-mahrooghi
-project-ilya-mahrooghi created by GitHub Classroom
-
-ایلیا محروقی
-۴۰۰۱۱۰۰۱۱
+This project is State.io Game which developed in FOP course
